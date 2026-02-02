@@ -1,16 +1,4 @@
-# CodeJam - Extending Joule with code-based Agents
-
-In this CodeJam, you will learn how to build state-of-the-art AI agents using Generative AI Hub, JavaScript or Python. You will also gain the skills to create custom tools for your agents, including leveraging SAP's RPT-1 model. Finally, you will deploy your agents to BTP and connect them via A2A to Joule (subject to GA date). 
-
-The CodeJam will include the following SAP technologies:
-- Generative AI Hub on SAP AI Core
-- RPT-1
-- Grounding Service
-- SAP AI Launchpad
-- Joule/Joule Studio (subject to GA date)
-- Business Application Studio (Python/JavaScript)
-
-## Understanding the Use Case
+# Understanding the Use Case
 
 ![Missing Art Piece Museum](data/images/museum.PNG)
 
@@ -25,5 +13,3 @@ The investigation has zeroed in on three individuals, each with a different conn
 ![Missing Art Piece Museum](data/images/termination_letter.PNG)
 
 The truth is buried in a mountain of security logs, financial records, and phone calls. Today, your mission is not just to solve the crime, but to build the detectives that will. You will create a team of specialized AI agents designed to analyze the evidence, connect the dots, and expose the culprit."
- 
- 

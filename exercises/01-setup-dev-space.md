@@ -1,15 +1,16 @@
-# Setup SAP Business Application Studio and a dev space
+# Setup SAP Business Application Studio and your personald development space
+
 > [SAP Business Application Studio](https://help.sap.com/docs/bas/sap-business-application-studio/what-is-sap-business-application-studio) is based on Code-OSS, an open-source project used for building Visual Studio Code. Available as a cloud service, SAP Business Application Studio provides a desktop-like experience similar to leading IDEs, with command line and optimized editors.
 
 > At the heart of SAP Business Application Studio are the dev spaces. The dev spaces are comparable to isolated virtual machines in the cloud containing tailored tools and preinstalled runtimes per business scenario, such as SAP Fiori, SAP S/4HANA extensions, Workflow, HANA native development and more. This simplifies and speeds up the setup of your development environment, enabling you to efficiently develop, test, build, and run your solutions locally or in the cloud.
 
 ## Open SAP Business Application Studio
+
 👉 Go back to the [BTP cockpit](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
 
 👉 Navigate to `Instances and Subscriptions` and open `SAP Business Application Studio`.
 
 ![Open BAS](images/BTP_cockpit_BAS.png)
-
 
 ## Create a new Dev Space for CodeJam exercises
 
@@ -47,7 +48,7 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 ## Open the Workspace
 
-The cloned repository contains a file `codejam.code-workspace` and therefore you will be asked, if you want to open it. 
+The cloned repository contains a file `codejam.code-workspace` and therefore you will be asked, if you want to open it.
 
 👉 Click **Open Workspace**.
 
@@ -56,8 +57,9 @@ The cloned repository contains a file `codejam.code-workspace` and therefore you
 ☝️ If you missed the previous dialog, you can go to the BAS Explorer, open the `codejam.code-workspace` file, and click **Open Workspace**.
 
 You should see:
-* `CODEJAM` as the workspace at the root of the hierarchy of the project, and
-* `codejam-code-based-agents` as the name of the top level folder, **not** `codejam-code-based-agents-1` or any other names ending with a number.
+
+- `CODEJAM` as the workspace at the root of the hierarchy of the project, and
+- `codejam-code-based-agents` as the name of the top level folder, **not** `codejam-code-based-agents-1` or any other names ending with a number.
 
 👉 You can close the **Get Started** tab.
 

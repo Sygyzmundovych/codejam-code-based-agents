@@ -1,41 +1,103 @@
-# SAP-samples/repository-template
-This default template for SAP Samples repositories includes files for README, LICENSE, and REUSE.toml. All repositories on github.com/SAP-samples will be created based on this template.
-
-# Containing Files
-
-1. The LICENSE file:
-In most cases, the license for SAP sample projects is `Apache 2.0`.
-
-2. The REUSE.toml file: 
-The [Reuse Tool](https://reuse.software/) must be used for your samples project. You can find the REUSE.toml in the project initial. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository.
-
-3. The README.md file (this file):
-Please edit this file as it is the primary description file for your project. You can find some placeholder titles for sections below.
-
-# [Title]
-<!-- Please include descriptive title -->
+# [CodeJam - Build code-based AI Agents on SAP Business Technology Platform]
 
 <!--- Register repository https://api.reuse.software/register, then add REUSE badge:
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/REPO-NAME)](https://api.reuse.software/info/github.com/SAP-samples/REPO-NAME)
 -->
 
 ## Description
-<!-- Please include SEO-friendly description -->
 
-## Requirements
+This repository contains the material for the "Build code-based AI Agents on SAP Business Technology Platform" CodeJam.
 
-## Download and Installation
+## Overview
+
+In this CodeJam, you will learn how to build state-of-the-art AI agents using Generative AI Hub, Python and JavaScript. You will also gain the skills to create custom tools for your agents, including leveraging SAP's RPT-1 model. Finally, you will deploy your agents to BTP.
+
+For this CodeJam you can choose betweem technology stack;
+
+- Python, CrewAI and LiteLLM or
+- JavaScript, LangGraph and LiteLLM
+
+You will learn more about the following SAP technologies:
+
+- Generative AI Hub on SAP AI Core
+- SAP RPT-1
+- Grounding Service
+- SAP AI Launchpad
+- Business Application Studio (Python, JavaScript)
+
+### Python Solution Diagram
+
+![python_solution_diagram](./assets/code-based-agents-codejam-sd.png)
+
+### JavaScript Solution Diagram
+
+![javascript_solution_diagram](./assets/code-based-agents-codejam-sd-js.png)
+
+## Session prerequisites
+
+For this CodeJam, the Developer Advocates provide a fully functioning system. You only need a laptop with a chromium-based browser installed.
+
+## Exercises
+
+In this CodeJam you can choose between two different technology stacks. Both are relevant for working with Agents and AI solutions, the differences are the progamming language and the frameworks being used for building the AI agents.
+
+If you are unsure on which path you should choose, ask the instructor for guidance.
+
+- [Exercise 00 - Understanding Generative AI Hub in SAP AI Core](./exercises/00-understanding-genAI-hub.md)
+- [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./exercises/01-setup-dev-space.md)
+- [Exercise 02 - Build your first AI Agent](./exercises/02-build-a-basic-agent.md)
+- [Exercise 03 - Build your first agent tool](./exercises/03-add-your-first-tool.md)
+- [Exercise 04 - Building a multi-agent system](./exercises/04-building-multi-agent-system.md)
+- [Exercise 05 - Add the Grounding service](./exercises/05-add-the-grounding-service.md)
+- [Exercise 06 - Use your AI Agents to solve the crime](./exercises/06-solve-the-crime.md)
+
+The instructor will start you on the first exercise, and that's the only one you should do. You should only proceed to the next exercise once the instructor tells you to.
+
+For this CodeJam you are provided with a subaccount on SAP BTP. The subaccount is only available for the duration of this CodeJam.
+
+## Frequently asked Questions
+
+You can find a list of frequently asked questions in the [Frequently Asked Questions Document](./frequently-asked-questions.md)
+
+## Further Learning on AI
+
+### YouTube Videos
+
+### Learning
+
+### Customer & Partner projects
+
+### 3rd-Party content
+
+## Feedback
+
+If you can spare a couple of minutes at the end of the session, please provide feedback to help us improve next time.
+
+Use this [Give feedback](https://github.com/SAP-samples/codejam-code-based-agents/issues/new?assignees=&labels=feedback&template=session-feedback-template.md&title=Session%20Feedback) link to create a special "feedback" issue, and follow the instructions in there.
+
+Thank you!
+
+## Other CodeJams
+
+### CodeJam repositories
+
+### CodeJam Community
+
+- [SAP CodeJam Events](https://community.sap.com/t5/sap-codejam/eb-p/codejam-events)
+- [SAP CodeJam Community](https://community.sap.com/t5/sap-codejam/gh-p/code-jam)
+- [SAP CodeJam Discussions](https://community.sap.com/t5/sap-codejam-discussions/bd-p/code-jamforum-board)
 
 ## Known Issues
-<!-- You may simply state "No known issues. -->
+
+- Exercise content not fully build yet.
+- Repository WIP
 
 ## How to obtain support
+
 [Create an issue](https://github.com/SAP-samples/<repository-name>/issues) in this repository if you find a bug or have questions about the content.
- 
+
 For additional support, [ask a question in SAP Community](https://answers.sap.com/questions/ask.html).
 
-## Contributing
-If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
-
 ## License
+
 Copyright (c) 2026 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSE) file.
