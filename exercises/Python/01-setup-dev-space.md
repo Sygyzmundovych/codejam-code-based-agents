@@ -75,9 +75,9 @@ You should see:
 
 👉 Click **Copy JSON**.
 
-👉 Return to BAS and create a new file `.env` in the `codejam-code-based-agents/exercises/Python` directory.
+👉 Return to BAS and create a new file `.env` in the [/project/Python/starter-project/.env](/project/Python/starter-project/.env) directory.
 
-👉 Paste the service key into `codejam-code-based-agents/exercises/Python/.env`, which should look similar to the following.
+👉 Update the variables using the service key into `codejam-code-based-agents/exercises/Python/.env`, which should look similar to the following.
 
 ```Python
 LITELLM_PROVIDER="sap"
