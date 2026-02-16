@@ -1,0 +1,6 @@
+appraise_loss_task:
+  description: >
+    Analyze the theft crime scene and predict the missing values of stolen items using the RPT-1 model via the call_rpt1 tool. Use this dict {payload} as input.
+  expected_output: >
+    JSON with predicted values for the stolen items.
+  agent: appraiser_agent

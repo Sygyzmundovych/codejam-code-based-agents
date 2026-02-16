@@ -20,7 +20,7 @@ That means you can use your Generative AI Hub credentials to build state of the 
 
 ### Step 1: Import Libraries and Load Environmental Variables
 
-👉 Create a new file [`/project/Python/starter-project/agent.py`](/project/Python/starter-project/agent.py)
+👉 Create a new file [`/project/Python/starter-project/agent.py`](/project/Python/starter-project/agent.py) (You can just click on the file link to create the file)
 
 👉 Add the following lines of code to import the necessary packages and load the infos from your environment (.env) file:
 
