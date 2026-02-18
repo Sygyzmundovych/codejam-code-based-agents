@@ -22,9 +22,9 @@ In this exercise, you will add an input variable and a tool to your agent. You w
 
 ### Step 1: Add an Input Variable to the Agent Prompt
 
-In order for the agent to run predictions on actual data, you need to be able to hand over input data.
+In order for the agent to run predictions on actual data, you need to be able to pass input data.
 
-👉 Add the variable payload to the goal of the agent and to the description on the task by adding {payload} to the string and converting the string to an **f-string** (formatted string) by adding `f` to the beginning of the string.
+👉 Add the variable payload to the goal of the agent and to the description of the task by adding {payload} to the string and converting the string to an **f-string** (formatted string) by adding `f` to the beginning of the string.
 
 Your agent and task definition should now look like this:
 
@@ -114,9 +114,9 @@ payload = {
 
 ---
 
-### Step 3: Run crew with input variable
+### Step 3: Run the Crew with Input Variables
 
-👉 Hand over your input to the crew
+👉 Pass your input to the crew
 
 ```python
 # Create a crew with the appraiser agent
@@ -379,7 +379,7 @@ if __name__ == "__main__":
 
 👉 Understand the output of the agent using SAP-RPT-1 as a tool.
 
-> SAP-RPT-1 not only predicts missing values with the [PREDICT] placeholder but also returns a confidence score for classification tasks as to how confident the model is in it's prediction.
+> SAP-RPT-1 not only predicts missing values with the [PREDICT] placeholder but also returns a confidence score for classification tasks, indicating how confident the model is in its predictions.
 
 
 ---
@@ -399,6 +399,14 @@ You extended your agent with:
 ```
 Agent Task → LLM Reasoning → Tool Decision → Tool Execution → Result → Agent Processing → Output
 ```
+
+### Why This Matters
+
+Tools are essential for agents to:
+- **Access External APIs** and services (like the RPT-1 model)
+- **Perform Real Actions** beyond text generation
+- **Provide Grounded Responses** based on actual data and computations
+- **Enable Autonomous Operation** by expanding the agent's capabilities
 
 ---
 

@@ -1,8 +1,5 @@
-from dotenv import load_dotenv
 from investigator_crew import InvestigatorCrew
     
-load_dotenv()
-
 def main():
     # Define the JSON payload for prediction
     payload = {
