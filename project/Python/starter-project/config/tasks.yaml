@@ -9,7 +9,24 @@ analyze_evidence_task:
   description: >
     Analyze the evidence of the theft that you can access via the grounding tool. 
     Provide any insights that can help in the investigation especially regarding alabies. 
-    Check the evidence iteratively for all suspect names and provide an analysis for each of them.
+    Check the evidence iteratively for all three suspect names 1. Sophie Dubois, 2. Marcus Chen and 
+    3. Viktor Petrovand and provide an analysis for each of them.
   expected_output: >
     A detailed analysis of the evidence for each suspect, including any insights that can help in the investigation.
   agent: evidence_analyst_agent
+
+solve_crime:
+  description: >
+    Find the thief from, the suspects by activating the evidence investigator agent and instructing him to look for the three suspects
+    using the grounding tool. He should find information on alibies and motives and return a report for you to analyze.
+  expected_output: >
+    The name of the thief.
+  agent: lead_detective_agent
+
+
+determine_insurance_loss:
+  description: >
+    Ask the loss appraiser agent to determine the missing values using the rpt-1 tool and then return the value of the painting.
+  expected_output: >
+    The value of the stolen painting.
+  agent: lead_detective_agent

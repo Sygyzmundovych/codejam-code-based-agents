@@ -147,12 +147,15 @@ if __name__ == "__main__":
 
 ### Step 1: Adding a New Agent
 
+We also have a lot of evidence in our evidence database. You can check the documents that are part if the evidence [here](exercises/data/documents).
+To analyze the evidence and find all the information on our three suspects Sophie Dubois (the night manager who was on duty), Marcus Chen (the security technician who was recently fired) and Viktor Petrov (a shadowy figure whose name has surfaced in connection with the crime) we will now build an **Evidence Analyst Agent**. This new agent will try to find any inconsistencies in the alibis and motives of the suspects.
+
 👉 Navigate to [`/project/Python/starter-project/config/agents.yaml`](/project/Python/starter-project/config/agents.yaml)
 
 👉 Add the configuration for the **Evidence Analyst Agent** below your other agent.
 
 ```yaml
-  evidence_analyst_agent:
+evidence_analyst_agent:
   role: >
     Evidence Analyst Agent
   goal: >
@@ -174,7 +177,7 @@ analyze_evidence_task:
   description: >
     Analyze the evidence of the theft that you can access via the grounding tool.
     Provide any insights that can help in the investigation especially regarding alibis. 
-    Check the evidence iteratively for all suspect names and provide an analysis for each of them.
+    Check the evidence iteratively for all three suspect names and provide an analysis for each of them.
   expected_output: >
     A detailed analysis of the evidence for each suspect, including any insights that can help in the investigation.
   agent: evidence_analyst_agent
@@ -204,7 +207,7 @@ def analyze_evidence_task(self) -> Task:
 
 👉 Run your crew to test it.
 
-👉 Understand the output of the agents. You might realize the Evidence Analyst Agent is not actually using a tool yet. We will build it in the next exercise.
+👉 Understand the output of the agents. You might realize the Evidence Analyst Agent does not yet have access to the actual evidence and is not actually using a tool yet. We will build it in the next exercise.
 
 ---
 
