@@ -41,13 +41,13 @@ In this CodeJam you can choose between two different technology stacks. Both are
 
 If you are unsure on which path you should choose, ask the instructor for guidance.
 
-- [Exercise 00 - Understanding Generative AI Hub in SAP AI Core](./exercises/00-understanding-genAI-hub.md)
-- [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./exercises/01-setup-dev-space.md)
-- [Exercise 02 - Build your first AI Agent](./exercises/02-build-a-basic-agent.md)
-- [Exercise 03 - Build your first agent tool](./exercises/03-add-your-first-tool.md)
-- [Exercise 04 - Building a multi-agent system](./exercises/04-building-multi-agent-system.md)
-- [Exercise 05 - Add the Grounding service](./exercises/05-add-the-grounding-service.md)
-- [Exercise 06 - Use your AI Agents to solve the crime](./exercises/06-solve-the-crime.md)
+- [Exercise 00 - Understanding Generative AI Hub in SAP AI Core](./exercises/Python/00-understanding-genAI-hub.md)
+- [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./exercises/Python/01-setup-dev-space.md)
+- [Exercise 02 - Build your first AI Agent](./exercises/Python/02-build-a-basic-agent.md)
+- [Exercise 03 - Build your first agent tool](./exercises/Python/03-add-your-first-tool.md)
+- [Exercise 04 - Building a multi-agent system](./exercises/Python/04-building-multi-agent-system.md)
+- [Exercise 05 - Add the Grounding service](./exercises/Python/05-add-the-grounding-service.md)
+- [Exercise 06 - Use your AI Agents to solve the crime](./exercises/Python/06-solve-the-crime.md)
 
 The instructor will start you on the first exercise, and that's the only one you should do. You should only proceed to the next exercise once the instructor tells you to.
 
