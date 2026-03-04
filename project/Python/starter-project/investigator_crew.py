@@ -2,16 +2,8 @@ from crewai import Agent, Crew, Task, Process
 from crewai.project import CrewBase, agent, task, crew
 from crewai.tools import tool
 from rpt_client import RPT1Client
+from grounding_tool import mock_grounding_service
 from dotenv import load_dotenv
-
-import json
-
-from gen_ai_hub.document_grounding.client import RetrievalAPIClient
-from gen_ai_hub.document_grounding.models.retrieval import (
-    RetrievalSearchInput,
-    RetrievalSearchFilter,
-)
-from gen_ai_hub.orchestration.models.document_grounding import DataRepositoryType
 
 load_dotenv()
 
@@ -30,7 +22,7 @@ def call_rpt1(payload: dict) -> str:
 @tool("call_grounding_service")
 def call_grounding_service(user_question: str) -> str:
     """Function to call the grounding service and retrieve relevant information based on the user's question."""
-    retrieval_client = RetrievalAPIClient()
+    """retrieval_client = RetrievalAPIClient()
 
     search_filter = RetrievalSearchFilter(
         id="vector",
@@ -48,7 +40,8 @@ def call_grounding_service(user_question: str) -> str:
 
     response = retrieval_client.search(search_input)
 
-    response_dict = json.dumps(response.model_dump(), indent=2)
+    response_dict = json.dumps(response.model_dump(), indent=2)"""
+    response_dict = mock_grounding_service(user_question)
     return response_dict
 
 
@@ -60,38 +53,27 @@ class InvestigatorCrew():
     tasks_config = 'config/tasks.yaml'
 
     @agent
-    def lead_detective_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['lead_detective_agent'], 
-            verbose=True
-        )
-
-    @agent
     def appraiser_agent(self) -> Agent:
         return Agent(
             config=self.agents_config['appraiser_agent'], 
-            verbose=True,
-            tools=[call_rpt1]
+            tools=[call_rpt1],
+            #verbose=True
         )
     
     @agent
     def evidence_analyst_agent(self) -> Agent:
         return Agent(
             config=self.agents_config['evidence_analyst_agent'], 
-            verbose=True,
-            tools=[call_grounding_service]
+            tools=[call_grounding_service],
+            #verbose=True
         )
-
-    @task
-    def solve_crime(self) -> Task:
-        return Task(
-            config=self.tasks_config['solve_crime'] # type: ignore[index]
-        )
-
-    @task
-    def determine_insurance_loss(self) -> Task:
-        return Task(
-            config=self.tasks_config['determine_insurance_loss'] # type: ignore[index]
+    
+    @agent
+    def lead_detective_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['lead_detective_agent'], 
+            allow_delegation=True,
+            #verbose=True
         )
 
     @task
@@ -105,6 +87,13 @@ class InvestigatorCrew():
         return Task(
             config=self.tasks_config['analyze_evidence_task'] # type: ignore[index]
         )
+    
+    @task
+    def solve_crime(self) -> Task:
+        return Task(
+            config=self.tasks_config['solve_crime'], # type: ignore[index]
+            context=[self.appraise_loss_task(), self.analyze_evidence_task()]
+        )
 
     @crew
     def crew(self) -> Crew:
@@ -112,5 +101,6 @@ class InvestigatorCrew():
             agents=self.agents,  # Automatically collected by the @agent decorator
             tasks=self.tasks,    # Automatically collected by the @task decorator.
             process=Process.sequential,
-            verbose=True,
+            #manager_agent=self.lead_detective_agent(),
+            verbose=True
         )

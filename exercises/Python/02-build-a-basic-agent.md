@@ -41,10 +41,11 @@ Every agent needs to have at least a **role**, a **goal**, and a **backstory**. 
 ```python
 # Create a Loss Appraiser Agent
 appraiser_agent = Agent(
-    role="Loss Appraiser",
-    goal="Predict the missing values of stolen items using the RPT-1 model via the call_rpt1 tool use this payload as input.",
-    backstory="You are an expert insurance appraiser specializing in fine art valuation and theft assessment.",
+    role="Stolen Goods Loss Appraiser",
+    goal=f"Predict the monetary value of stolen items ONLY by calling the call_rpt1 tool with payload {payload}. Do NOT invent or estimate values yourself. If the tool call fails, report the failure.",
+    backstory="You are an insurance appraiser who relies strictly on model predictions. You never guess values.",
     llm="sap/gpt-4o",  # provider/llm - Using one of the models from SAP's model library in Generative AI Hub
+    tools=[call_rpt1],
     verbose=True
 )
 ```
@@ -159,3 +160,5 @@ In the following exercises, you will:
 - [CrewAI Documentation](https://docs.crewai.com/)
 - [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
 - [LiteLLM Documentation](https://docs.litellm.ai/)
+
+[Next exercise](03-add-your-first-tool.md)

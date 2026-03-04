@@ -7,8 +7,6 @@ Now that you know how to build a simple AI agent with LiteLLM, CrewAI and Genera
 
 👉 Create a new file [`/project/Python/starter-project/config/tasks.yaml`](/project/Python/starter-project/config/tasks.yaml)
 
-👉 Create a new file [`/project/Python/starter-project/config/crew_config.yaml`](/project/Python/starter-project/config/crew_config.yaml)
-
 👉 Create another new file [`/project/Python/starter-project/investigator_crew.py`](/project/Python/starter-project/investigator_crew.py)
 
 
@@ -21,7 +19,7 @@ First we will transfer the agent configuration from [`/project/Python/starter-pr
 # agents.yaml
 appraiser_agent:
   role: >
-    Loss Appraiser
+    Stolen Goods Loss Appraiser
   goal: >
     Predict...
   backstory: >
@@ -39,19 +37,6 @@ inspection_task:
   expected_output: >
     JSON...
   agent: ???
-```
-
-👉 Do the same for the crew itself.
-
-```yaml
-# crew_config.yaml
-agents:
-  - theft_crime_scene_agent
-
-tasks:
-  - inspection_task
-
-verbose: true
 ```
 
 ### Move Code to crew.py File
@@ -148,22 +133,23 @@ if __name__ == "__main__":
 ### Step 1: Adding a New Agent
 
 We also have a lot of evidence in our evidence database. You can check the documents that are part if the evidence [here](exercises/data/documents).
-To analyze the evidence and find all the information on our three suspects Sophie Dubois (the night manager who was on duty), Marcus Chen (the security technician who was recently fired) and Viktor Petrov (a shadowy figure whose name has surfaced in connection with the crime) we will now build an **Evidence Analyst Agent**. This new agent will try to find any inconsistencies in the alibis and motives of the suspects.
+To analyze the evidence and find all the information on our three suspects Sophie Dubois (the night manager who was on duty), Marcus Chen (the security technician who was recently fired) and Viktor Petrov (a shadowy figure whose name has surfaced in connection with the crime) we will now build an **Criminal Evidence Analyst**. This new agent will try to find any inconsistencies in the alibis and motives of the suspects.
 
 👉 Navigate to [`/project/Python/starter-project/config/agents.yaml`](/project/Python/starter-project/config/agents.yaml)
 
-👉 Add the configuration for the **Evidence Analyst Agent** below your other agent.
+👉 Add the configuration for the **Criminal Evidence Analyst** below your other agent.
 
 ```yaml
 evidence_analyst_agent:
   role: >
-    Evidence Analyst Agent
+    Criminal Evidence Analyst
   goal: >
-    Analyze the evidence of the theft that you can access via the grounding tool. Provide any insights that can help in the investigation especially
-    regarding alibis. Check the evidence iteratively for all suspect names and provide an analysis for each of them.
+    Retrieve and analyze evidence ONLY via the call_grounding_service tool. 
+    Search for each suspect by name: {suspect_names}. Do NOT fabricate any evidence or alibis. 
+    Report only what the tool returns.
   backstory: >
-    You are an expert evidence analyser for major theft cases.
-  llm: sap/gpt-4o
+    You are a methodical evidence analyst who bases conclusions strictly on retrieved documents. You never assume facts.
+  llm: sap/anthropic--claude-4.5-opus
 ```
 
 ## Step 2: Add The Task For Your New Agent
@@ -221,12 +207,6 @@ You built a multi-agent system by:
 2. **Creating Reusable Agent Templates** with the `@agent` decorator
 3. **Defining Task Assignments** with the `@task` decorator
 4. **Orchestrating Multiple Agents** into a crew with sequential processing
-
-### The Multi-Agent Workflow
-
-```
-Task 1 (Agent 1) → Task 2 (Agent 2) → Task 3 (Agent 3) → Aggregated Results
-```
 
 ### Why This Architecture Matters
 
@@ -287,3 +267,5 @@ In the following exercises, you will:
 - [CrewAI Multi-Agent Examples](https://github.com/joaomdmoura/crewai-examples)
 - [CrewAI Documentation](https://docs.crewai.com/)
 - [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
+
+[Next exercise](05-add-the-grounding-service.md)
