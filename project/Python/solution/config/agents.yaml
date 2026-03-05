@@ -23,8 +23,11 @@ lead_detective_agent:
   role: >
     Lead Detective and Case Manager
   goal: >
-    Solve the crime. Use evidence provided by the Evidence Analyst and valuation from the Loss Appraiser. 
-    Based on their findings, determine which of these three suspects {suspect_names} committed the theft AND report the total value of stolen goods.
+    Find the thief among the suspects by activating the evidence analyst agent and instructing them to look for information on 
+    each of the three suspects using the grounding tool. They should find information on alibis and motives and return a report 
+    for you to analyze.
   backstory: >
     You are a lead detective who makes conclusions only from evidence and appraisals provided by your team. You never speculate.
   llm: sap/anthropic--claude-4.5-opus
+
+  

@@ -353,7 +353,7 @@ class RPT1Client:
 
 To add a custom tool to an agent, you create a function that encapsulates the functionality you want to expose. This function will be available for the agent to call when completing its task.
 
-👉 Import the SAP-RPT-1 client at the top of your `agent.py` file and initialize the client by adding the code below:
+👉 Import the SAP-RPT-1 client at the top of your `basic_agent.py` file and initialize the client by adding the code below:
 
 ```python
 from rpt_client import RPT1Client
@@ -375,7 +375,7 @@ def call_rpt1(payload: dict) -> str:
 
 ### Step 2: Make the Function a Tool
 
-👉 Add this `from crewai.tools import tool` to your import at the top of your `agent.py` file.
+👉 Add this `from crewai.tools import tool` to your import at the top of your `basic_agent.py` file.
 
 👉 Add this line `@tool("call_rpt1")` above your `call_rpt1()` function. 
 
@@ -406,7 +406,7 @@ appraiser_agent = Agent(
 )
 ```
 
-👉 Your code in `agent.py` should now look like this: 
+👉 Your code in `basic_agent.py` should now look like this: 
 
 ```python
 from dotenv import load_dotenv
@@ -667,9 +667,13 @@ if __name__ == "__main__":
 
 👉 Run your crew to test it.
 
+```bash
+python project/Python/starter-project/basic_agent.py
+```
+
 👉 Understand the output of the agent using SAP-RPT-1 as a tool.
 
-> SAP-RPT-1 not only predicts missing values with the [PREDICT] placeholder but also returns a confidence score for classification tasks, indicating how confident the model is in its predictions.
+> SAP-RPT-1 not only predicts missing values with the **[PREDICT]** placeholder but also returns a confidence score for classification tasks, indicating how confident the model is in its predictions.
 
 
 ---

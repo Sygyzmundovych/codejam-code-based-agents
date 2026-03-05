@@ -46,24 +46,6 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 ![Open a project](/exercises/data/images/clone_git_2.png)
 
-## Open the Workspace
-
-The cloned repository contains a file `codejam.code-workspace` and therefore you will be asked, if you want to open it.
-
-👉 Click **Open Workspace**.
-
-![Automatic notification to open a workspace](/exercises/data/images/open_workspace.png)
-
-☝️ If you missed the previous dialog, you can go to the BAS Explorer, open the `codejam.code-workspace` file, and click **Open Workspace**.
-
-You should see:
-
-- `CODEJAM` as the workspace at the root of the hierarchy of the project, and
-- `codejam-code-based-agents` as the name of the top level folder, **not** `codejam-code-based-agents-1` or any other names ending with a number.
-
-👉 You can close the **Get Started** tab.
-
-![Open a workspace](/exercises/data/images/workspace.png)
 
 ## Configure the connection details to Generative AI Hub
 
@@ -77,7 +59,7 @@ You should see:
 
 👉 Return to BAS and create a new file `.env` in the [/project/Python/starter-project/.env](/project/Python/starter-project/.env) directory.
 
-👉 Update the variables using the service key into `codejam-code-based-agents/exercises/Python/.env`, which should look similar to the following.
+👉 Update the variables using the service key into `/project/Python/starter-project/.env`, which should look similar to the following.
 
 ```Python
 LITELLM_PROVIDER="sap"
@@ -98,13 +80,13 @@ RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v
 👉 Create a virtual environment using the following command:
 
 ```bash
-python3 -m venv ~/projects/generative-ai-codejam/env --upgrade-deps
+python3 -m venv ~/projects/codejam-code-based-agents/env --upgrade-deps
 ```
 
 👉 Activate the `env` virtual environment like this and make sure it is activated:
 
 ```bash
-source ~/projects/generative-ai-codejam/env/bin/activate
+source ~/projects/codejam-code-based-agents/env/bin/activate
 ```
 
 ![venv](/exercises/data/images/venv.png)
