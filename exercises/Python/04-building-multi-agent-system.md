@@ -187,7 +187,7 @@ def evidence_analyst_agent(self) -> Agent:
 @task
 def analyze_evidence_task(self) -> Task:
     return Task(
-        config=self.tasks_config['analyze_evidence_task'] # type: ignore[index]
+        config=self.tasks_config['analyze_evidence_task'] 
     )
 ```
 

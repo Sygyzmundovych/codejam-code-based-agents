@@ -4,7 +4,24 @@
 
 👉 Go to [SAP AI Launchpad](https://genai-codejam-luyq1wkg.ai-launchpad.prod.eu-central-1.aws.ai-prod.cloud.sap/aic/index.html#/workspaces&/a/detail/TwoColumnsMidExpanded/?workspace=api-connection&resourceGroup=s3-grounding) 
 
-👉 And follow the isntructions [here](https://github.com/SAP-samples/generative-ai-codejam/blob/main/exercises/07-orchestration-service-UI-S3-grounding.md) to get to know the grounding service.
+☝️ In this subaccount the connection between the SAP AI Core service instance and the SAP AI Launchpad application is already established. Otherwise you would have to add a new AI runtime using the SAP AI Core service key information.
+
+### Select the resource group code-based-agent-codejam
+SAP AI Core tenants use [resource groups](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/resource-groups) to isolate AI resources and workloads. Scenarios (e.g. `foundation-models`) and executables (a template for training a model or creation of a deployment) are shared across all resource groups within the instance.
+
+>DO NOT USE THE DEFAULT `default` RESOURCE GROUP!
+
+👉 Go to **Workspaces**.
+
+👉 Select your workspace (like `codejam-YYY`) and your resource group `ai-agent-codejam`.
+
+👉 Make sure it is set as a context. The proper name of the context, like `codejam-YYY (ai-agent-codejam)` should show up at the top next to SAP AI Launchpad.
+
+👉 Go to the `Generative AI Hub > Grounding Management` tab and open the existing pipeline. 
+
+👉 Have a look around. You can also run a search by clicking the `Run Search`button.
+
+☝️ You will need the pipeline ID in the next step!
 
 ## Add the Grounding Service to your Agent Crew
 
@@ -23,9 +40,9 @@ def call_grounding_service(user_question: str) -> str:
     search_filter = RetrievalSearchFilter(
         id="vector",
         dataRepositoryType=DataRepositoryType.VECTOR.value,
-        dataRepositories=["YOUR REPO ID HERE"], #pipeline s3 grounding codejam
+        dataRepositories=["YOUR REPO ID HERE"], # pipeline ID from Grounding Management in SAP AI Launchpad
         searchConfiguration={
-            "maxChunkCount": 2
+            "maxChunkCount": 5
         },
     )
 

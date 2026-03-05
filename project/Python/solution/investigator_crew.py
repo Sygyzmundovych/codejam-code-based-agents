@@ -35,7 +35,7 @@ def call_grounding_service(user_question: str) -> str:
     search_filter = RetrievalSearchFilter(
         id="vector",
         dataRepositoryType=DataRepositoryType.VECTOR.value,
-        dataRepositories=["0d3b132a-cbe1-4c75-abe7-adfbbab7e002"], #pipeline s3 grounding codejam
+        dataRepositories=["0d3b132a-cbe1-4c75-abe7-adfbbab7e002"], #piprline s3 grounding codejam
         searchConfiguration={
             "maxChunkCount": 5
         },
@@ -86,19 +86,19 @@ class InvestigatorCrew():
     @task
     def appraise_loss_task(self) -> Task:
         return Task(
-            config=self.tasks_config['appraise_loss_task'] 
+            config=self.tasks_config['appraise_loss_task'] # type: ignore[index]
         )
     
     @task
     def analyze_evidence_task(self) -> Task:
         return Task(
-            config=self.tasks_config['analyze_evidence_task'] 
+            config=self.tasks_config['analyze_evidence_task'] # type: ignore[index]
         )
     
     @task
     def solve_crime(self) -> Task:
         return Task(
-            config=self.tasks_config['solve_crime'],
+            config=self.tasks_config['solve_crime'], # type: ignore[index]
             context=[self.appraise_loss_task(), self.analyze_evidence_task()]
         )
 
@@ -108,5 +108,6 @@ class InvestigatorCrew():
             agents=self.agents,  # Automatically collected by the @agent decorator
             tasks=self.tasks,    # Automatically collected by the @task decorator.
             process=Process.sequential,
+            #manager_agent=self.lead_detective_agent(),
             verbose=True
         )

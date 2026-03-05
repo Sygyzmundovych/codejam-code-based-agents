@@ -10,27 +10,27 @@
 
 👉 Navigate to `Instances and Subscriptions` and open `SAP Business Application Studio`.
 
-![Open BAS](images/BTP_cockpit_BAS.png)
+![Open BAS](/exercises/data/images/BTP_cockpit_BAS.png)
 
 ## Create a new Dev Space for CodeJam exercises
 
 👉 Create a new Dev Space.
 
-![Create a Dev Space 1](images/bas.png)
+![Create a Dev Space 1](/exercises/data/images/bas.png)
 
 👉 Enter the name of the dev space `GenAICodeJam`, select the `Basic` kind of application and `Python Tools` from Additional SAP Extensions.
 
 👉 Click **Create Dev Space**.
 
-![Create a Dev Space 2](images/create_dev_space.png)
+![Create a Dev Space 2](/exercises/data/images/create_dev_space.png)
 
 You should see the dev space **STARTING**.
 
-![Dev Space is Starting](images/dev_starting.png)
+![Dev Space is Starting](/exercises/data/images/dev_starting.png)
 
 👉 Wait for the dev space to get into the **RUNNING** state and then open it.
 
-![Dev Space is Running](images/dev_running.png)
+![Dev Space is Running](/exercises/data/images/dev_running.png)
 
 ## Clone the exercises from the Git repository
 
@@ -40,11 +40,11 @@ You should see the dev space **STARTING**.
 https://github.com/SAP-samples/codejam-code-based-agents.git
 ```
 
-![Clone the repo](images/clone_git.png)
+![Clone the repo](/exercises/data/images/clone_git.png)
 
 👉 Click **Open** to open a project in the Explorer view.
 
-![Open a project](images/clone_git_2.png)
+![Open a project](/exercises/data/images/clone_git_2.png)
 
 ## Open the Workspace
 
@@ -52,7 +52,7 @@ The cloned repository contains a file `codejam.code-workspace` and therefore you
 
 👉 Click **Open Workspace**.
 
-![Automatic notification to open a workspace](images/open_workspace.png)
+![Automatic notification to open a workspace](/exercises/data/images/open_workspace.png)
 
 ☝️ If you missed the previous dialog, you can go to the BAS Explorer, open the `codejam.code-workspace` file, and click **Open Workspace**.
 
@@ -63,7 +63,7 @@ You should see:
 
 👉 You can close the **Get Started** tab.
 
-![Open a workspace](images/workspace.png)
+![Open a workspace](/exercises/data/images/workspace.png)
 
 ## Configure the connection details to Generative AI Hub
 
@@ -71,7 +71,7 @@ You should see:
 
 👉 Navigate to `Instances and Subscriptions` and open the SAP AI Core instance's service binding.
 
-![Service Binding in the BTP Cockpit](data/images/service-binding.png)
+![Service Binding in the BTP Cockpit](/exercises/data/images/service-binding.png)
 
 👉 Click **Copy JSON**.
 
@@ -93,7 +93,7 @@ RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v
 
 👉 Start a new Terminal.
 
-![Start terminal](data/images/start_terminal.png)
+![Start terminal](/exercises/data/images/start_terminal.png)
 
 👉 Create a virtual environment using the following command:
 
@@ -107,7 +107,7 @@ python3 -m venv ~/projects/generative-ai-codejam/env --upgrade-deps
 source ~/projects/generative-ai-codejam/env/bin/activate
 ```
 
-![venv](data/images/venv.png)
+![venv](/exercises/data/images/venv.png)
 
 👉 Install LiteLLM and CrewAI using the following `pip install` commands.
 
