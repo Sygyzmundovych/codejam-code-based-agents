@@ -40,6 +40,7 @@ For this CodeJam, the Developer Advocates provide a fully functioning system. Yo
 
 If you are unsure on which path you should choose, ask the instructor for guidance.
  -->
+- [START THE EXERCISES](https://github.com/SAP-samples/codejam-code-based-agents/blob/main/exercises/readme.md)
 - [Exercise 00 - Understanding Generative AI Hub in SAP AI Core](./exercises/Python/00-understanding-genAI-hub.md)
 - [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./exercises/Python/01-setup-dev-space.md)
 - [Exercise 02 - Build your first AI Agent](./exercises/Python/02-build-a-basic-agent.md)

@@ -61,6 +61,8 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 👉 Update the variables using the service key into `/project/Python/starter-project/.env`, which should look similar to the following.
 
+☝️ You will update the `RPT-1_DEPLOYMENT_URL` in a later exercise.
+
 ```Python
 LITELLM_PROVIDER="sap"
 AICORE_AUTH_URL="https://#####.authentication.eu10.hana.ondemand.com/oauth/token"

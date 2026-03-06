@@ -3,12 +3,12 @@ SAP AI Core is SAP's AI runtime. Here you can train your own models, fine-tune m
 
 [SAP AI Launchpad](https://help.sap.com/docs/ai-launchpad) is the UI for SAP AI Core and Generative AI Hub and is a multitenant SaaS application on SAP BTP. You can use it to try out or deploy models, to start training jobs, evaluation jobs, build orchestration pipelines and much more.
 
-## [1/3] Open SAP Business Technology Platform
+## Open SAP Business Technology Platform
 👉 Open SAP [BTP Cockpit](https://emea.cockpit.btp.cloud.sap/cockpit).
 
 👉 Navigate to the subaccount: [`GenAI CodeJam`](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
 
-## [2/3] Check Out the Subaccount
+## Check Out the Subaccount
 
 👉 Go to **Instances and Subscriptions**.
 
