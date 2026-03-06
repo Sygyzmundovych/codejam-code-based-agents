@@ -127,6 +127,7 @@ Multi-agent systems are powerful because they:
 ## Key Takeaways
 
 - **Multi-Agent Systems** decompose complex problems into specialized, collaborative agents
+- **Sequential Processing** allows agents to work in order, with later agents using earlier results
 - **Task Delegation** allows agents to coordinate work and share results through the CrewAI framework
 - **Tool Integration** across multiple agents (RPT-1, Grounding Service) provides comprehensive capabilities
 - **Agent Prompts** must be carefully crafted to guide reasoning and ensure correct tool usage
@@ -144,9 +145,9 @@ In the following exercises, you will:
 4. ✅ Integrate the Grounding Service for better reasoning and fact-checking
 5. ✅ Solve the museum art theft mystery using your fully-featured agent team (this exercise)
 
-Congratulations on completing the code jam! You've successfully built a sophisticated multi-agent AI system that can:
+Congratulations on completing the CodeJam! You've successfully built a sophisticated multi-agent AI system that can:
 - Analyze evidence from documents
-- Predict financial values using ML models
+- Predict financial values using the SAP-RPT-1 model
 - Coordinate between multiple specialized agents
 - Solve complex real-world problems through collaborative reasoning
 
@@ -176,6 +177,9 @@ Congratulations on completing the code jam! You've successfully built a sophisti
   - Your search query is descriptive and targets the right evidence type
   - The `maxChunkCount` parameter is appropriate
 
+**Issue**: Agents not executing in order or parallel execution
+- **Solution**: Ensure you've set `process=Process.sequential` in your `@crew` method. Use `Process.hierarchical` if you need a manager agent to coordinate.
+
 **Issue**: Agent is hallucinating or not finding the correct suspect
 - **Solution**: Refine your Lead Detective Agent's prompt to:
   - Be more specific about what evidence to look for
@@ -195,11 +199,3 @@ Congratulations on completing the code jam! You've successfully built a sophisti
 ## Resources
 
 - [CrewAI Multi-Agent Documentation](https://docs.crewai.com/)
-- [CrewAI Task Management](https://docs.crewai.com/concepts/tasks)
-- [CrewAI Crew Orchestration](https://docs.crewai.com/concepts/crews)
-- [SAP-RPT-1 Playground](https://rpt.cloud.sap/)
-- [SAP AI Launchpad Grounding Management](https://help.sap.com/docs/sap-ai-launchpad)
-- [SAP Cloud SDK for AI (Python)](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/_reference/README_sphynx.html)
-- [CrewAI GenAI Hub Examples](https://sap-contributions.github.io/litellm-agentic-examples/_notebooks/examples/crewai_litellm_lib.html)
-- [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
-- [LiteLLM Documentation](https://docs.litellm.ai/)

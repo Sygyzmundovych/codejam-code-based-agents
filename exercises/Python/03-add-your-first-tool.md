@@ -678,13 +678,15 @@ if __name__ == "__main__":
 
 ☝️ In this subaccount the connection between the SAP AI Core service instance and the SAP AI Launchpad application is already established. Otherwise you would have to add a new AI runtime using the SAP AI Core service key information.
 
->DO NOT USE THE DEFAULT `default` RESOURCE GROUP!
+>DO NOT USE THE `default` RESOURCE GROUP!
 
 👉 Go to **Workspaces**.
 
 👉 Select your workspace (like `codejam-YYY`) and your resource group `ai-agent-codejam`.
 
 👉 Make sure it is set as a context. The proper name of the context, like `codejam-YYY (ai-agent-codejam)` should show up at the top next to SAP AI Launchpad.
+
+![AI Launchpad Resource Group](/exercises/data/images/.png)
 
 👉 Navigate to `ML Operations > Deployments`
 
@@ -693,6 +695,8 @@ if __name__ == "__main__":
 ```bash
 RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2/inference/deployments/<ID GOES HERE>/predict"
 ```
+
+![AI Launchpad RPT-1 Deployment](/exercises/data/images/.png)
 
 
 ### Step 5: Run Your Crew With the RPT-1 Tool
@@ -723,7 +727,7 @@ You extended your agent with:
 ### The Tool Flow
 
 ```
-Agent Task → LLM Reasoning → Tool Decision → Tool Execution → Result → Agent Processing → Output
+Agent Task → LLM Reasoning → Tool Decision → Tool Execution → Result → Agent Processing → LLM Reasoning → Output
 ```
 
 ### Why This Matters
@@ -777,7 +781,7 @@ In the following exercises, you will:
   - `AICORE_CLIENT_SECRET`
   - `AICORE_AUTH_URL`
   - `RPT1_DEPLOYMENT_URL`
-  - `AICORE_RESOURCE_GROUP` (optional, defaults to "default")
+  - `AICORE_RESOURCE_GROUP` (make sure you set it to ai-agent-codejam)
 
 **Issue**: Tool returns error `400` or `422`
 - **Solution**: Verify your payload structure matches the RPT-1 API specification. Check the [SAP-RPT-1 Playground](https://rpt.cloud.sap/) for valid payload examples.

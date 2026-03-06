@@ -193,7 +193,11 @@ def analyze_evidence_task(self) -> Task:
 
 👉 Run your crew to test it.
 
-👉 Understand the output of the agents. You might realize the Evidence Analyst Agent does not yet have access to the actual evidence and is not actually using a tool yet. We will build it in the next exercise.
+```bash
+python project/Python/starter-project/main.py
+```
+
+👉 Understand the output of the agents. You might realize the Criminal Evidence Analyst does not yet have access to the actual evidence and is not actually using a tool yet. We will build it in the next exercise.
 
 ---
 
@@ -222,7 +226,6 @@ Multi-agent systems provide:
 
 - **YAML Configuration** provides cleaner, more maintainable agent definitions
 - **Decorators** (`@agent`, `@task`, `@crew`) streamline multi-agent creation in CrewAI
-- **Sequential Processing** allows agents to work in order, with later agents using earlier results
 - **Agent Specialization** makes systems more robust and easier to understand
 - **Separation of Concerns** keeps configuration separate from implementation logic
 
@@ -247,12 +250,6 @@ In the following exercises, you will:
 **Issue**: `Agent not found in configuration` or missing agent reference
 - **Solution**: Verify that the agent name in your `agents.yaml` matches the key referenced in the `@agent` method and that the agent is added to the agents list in the crew.
 
-**Issue**: Agents not executing in order or parallel execution
-- **Solution**: Ensure you've set `process=Process.sequential` in your `@crew` method. Use `Process.hierarchical` if you need a manager agent to coordinate.
-
-**Issue**: `ModuleNotFoundError: No module named 'crewai.project'`
-- **Solution**: Ensure you're using CrewAI version 0.22.0 or higher: `pip install --upgrade crewai`
-
 **Issue**: Tool not available to agents
 - **Solution**: Verify that you're passing `tools=[call_rpt1]` to each agent that needs access to the tool in the `@agent` method.
 
@@ -262,10 +259,7 @@ In the following exercises, you will:
 
 - [CrewAI Project Structure Guide](https://docs.crewai.com/en/guides/agents/crafting-effective-agents)
 - [CrewAI YAML Configuration](https://docs.crewai.com/concepts/agents)
-- [CrewAI Process Types](https://docs.crewai.com/concepts/processes)
-- [CrewAI Decorators Documentation](https://docs.crewai.com/en/guides/agents/agent-setup)
 - [CrewAI Multi-Agent Examples](https://github.com/joaomdmoura/crewai-examples)
-- [CrewAI Documentation](https://docs.crewai.com/)
 - [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
 
 [Next exercise](05-add-the-grounding-service.md)

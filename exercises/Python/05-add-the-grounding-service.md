@@ -28,6 +28,9 @@ SAP AI Core tenants use [resource groups](https://help.sap.com/docs/sap-ai-core/
 
 ☝️ You will need the pipeline ID in the next step!
 
+![Grounding Module AI Launchpad](/exercises/data/images/.png)
+
+
 ---
 
 ## Add The Grounding Service To Your Agent Crew
@@ -118,15 +121,16 @@ def evidence_analyst_agent(self) -> Agent:
 
 You integrated a grounding service tool with your agent that:
 
-1. **Connects** to SAP AI Launchpad's document grounding capabilities
-2. **Searches** indexed evidence documents using vector similarity
-3. **Retrieves** relevant chunks of information to support the agent's analysis
-4. **Provides** context for the agent to make informed decisions
+1. **Connects** to the document grounding service of Generative AI Hub
+2. **Embeds** text chunks of evidence using OpenAI's embedding model
+3. **Searches** indexed evidence documents using vector similarity
+4. **Retrieves** relevant chunks of information to support the agent's analysis
+5. **Provides** context for the agent to make informed decisions
 
 ### The Grounding Flow
 
 ```
-User Query → Agent Processing → Grounding Tool Call → Vector Search → Document Chunks → Agent Analysis → Output
+User Query → LLM Reasoning → Agent Processing → Grounding Tool Call → Vector Search → Document Chunks → Agent Processing → LLM Reasoning → Output
 ```
 
 ### Why This Matters
@@ -143,7 +147,7 @@ Grounding services are essential for agents to:
 
 - **Grounding Services** extend agents' knowledge by connecting them to external document repositories
 - **Vector Search** enables semantic search across documents, finding contextually relevant information
-- **Document Pipelines** in SAP AI Launchpad manage document indexing and retrieval
+- **Document Pipelines** in SAP AI Core manage document indexing and retrieval
 - **Tool Integration** is key—grounding tools must be explicitly passed to agents via the `tools` parameter
 - **Repository IDs** identify which document collection to search, allowing agents to target specific data sources
 
@@ -191,11 +195,7 @@ In the following exercises, you will:
 
 ## Resources
 
-- [SAP AI Launchpad Documentation](https://help.sap.com/docs/sap-ai-launchpad)
 - [SAP AI Core Grounding Management](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/document-grounding)
 - [SAP Cloud SDK for AI (Python)](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/_reference/README_sphynx.html)
-- [CrewAI Tools Documentation](https://docs.crewai.com/concepts/tools)
-- [CrewAI Documentation](https://docs.crewai.com/)
-- [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
 
 [Next exercise](06-solve-the-crime.md)
