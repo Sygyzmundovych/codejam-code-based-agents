@@ -24,6 +24,8 @@ In this exercise, you will add an input variable and a tool to your agent. You w
 
 In order for the agent to run predictions on actual data, you need to be able to pass input data.
 
+👉 Navigate to your [`basic_agent.py`](/project/Python/starter-project/agent.py) file.
+
 👉 Add the variable payload to the goal of the agent and to the description of the task by adding {payload} to the string and converting the string to an **f-string** (formatted string) by adding `f` to the beginning of the string.
 
 Your agent and task definition should now look like this:
@@ -284,6 +286,11 @@ if __name__ == "__main__":
 ```
 
 👉 Run your crew to test it.
+```bash
+python project/Python/starter-project/basic_agent.py
+```
+
+☝️ You added an input variable to your agent but the agent is still not using a tool. Let's build the actual tool next.
 
 ---
 
@@ -631,9 +638,9 @@ def call_rpt1(payload: dict) -> str:
 
 # Create a Loss Appraiser Agent
 appraiser_agent = Agent(
-    role="Loss Appraiser",
-    goal=f"Predict the missing values of stolen items using the RPT-1 model via the call_rpt1 tool use this payload {payload} as input.",
-    backstory="You are an expert insurance appraiser specializing in fine art valuation and theft assessment.",
+    role="Stolen Goods Loss Appraiser",
+    goal=f"Predict the monetary value of stolen items ONLY by calling the call_rpt1 tool with payload {payload}. Do NOT invent or estimate values yourself. If the tool call fails, report the failure.",
+    backstory="You are an insurance appraiser who relies strictly on model predictions. You never guess values.",
     llm="sap/gpt-4o",  # provider/llm - Using one of the models from SAP's model library in Generative AI Hub
     tools=[call_rpt1],
     verbose=True
@@ -655,7 +662,7 @@ crew = Crew(
 
 # Execute the crew
 def main():
-    result = crew.kickoff(inputs={'payload': payload})
+    result = crew.kickoff()
     print("\n" + "="*50)
     print("Insurance Appraiser Report:")
     print("="*50)
@@ -664,6 +671,31 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+### Step 4: Update the .env File with the Correct SAP-RPT-1 URL
+
+👉 Go to [SAP AI Launchpad](https://genai-codejam-luyq1wkg.ai-launchpad.prod.eu-central-1.aws.ai-prod.cloud.sap/aic/index.html#/workspaces&/a/detail/TwoColumnsMidExpanded/?workspace=api-connection&resourceGroup=s3-grounding) 
+
+☝️ In this subaccount the connection between the SAP AI Core service instance and the SAP AI Launchpad application is already established. Otherwise you would have to add a new AI runtime using the SAP AI Core service key information.
+
+>DO NOT USE THE DEFAULT `default` RESOURCE GROUP!
+
+👉 Go to **Workspaces**.
+
+👉 Select your workspace (like `codejam-YYY`) and your resource group `ai-agent-codejam`.
+
+👉 Make sure it is set as a context. The proper name of the context, like `codejam-YYY (ai-agent-codejam)` should show up at the top next to SAP AI Launchpad.
+
+👉 Navigate to `ML Operations > Deployments`
+
+👉 Copy the ID of the SAP-RPT-1 deployment and paste it into the [.env](project/Python/starter-project/.env) file.
+
+```bash
+RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2/inference/deployments/<ID GOES HERE>/predict"
+```
+
+
+### Step 5: Run Your Crew With the RPT-1 Tool
 
 👉 Run your crew to test it.
 

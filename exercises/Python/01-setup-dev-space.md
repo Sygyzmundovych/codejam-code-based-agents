@@ -61,6 +61,8 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 👉 Update the variables using the service key into `/project/Python/starter-project/.env`, which should look similar to the following.
 
+👉 Make sure you also assign the correct `AICORE_RESOURCE_GROUP`, we will use `code-based-agent-codejam` for this CodeJam.
+
 ☝️ You will update the `RPT-1_DEPLOYMENT_URL` in a later exercise.
 
 ```Python
