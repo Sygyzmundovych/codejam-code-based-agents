@@ -8,39 +8,38 @@ This repository contains the material for the "Build code-based AI Agents on SAP
 
 ## Overview
 
-In this CodeJam, you will learn how to build state-of-the-art AI agents using Generative AI Hub, Python and JavaScript. You will also gain the skills to create custom tools for your agents, including leveraging SAP's RPT-1 model. Finally, you will deploy your agents to BTP.
+In this CodeJam, you will learn how to build state-of-the-art AI agents using Generative AI Hub, Python and JavaScript. You will also gain the skills to create custom tools for your agents, including leveraging the SAP-RPT-1 model and SAP's grounding service. Finally, you will deploy your agents to BTP.
 
-For this CodeJam you can choose betweem technology stack;
+For this CodeJam you will use:
 
-- Python, CrewAI and LiteLLM or
-- JavaScript, LangGraph and LiteLLM
+- Python, CrewAI and LiteLLM
 
 You will learn more about the following SAP technologies:
 
 - Generative AI Hub on SAP AI Core
-- SAP RPT-1
+- SAP-RPT-1
 - Grounding Service
 - SAP AI Launchpad
-- Business Application Studio (Python, JavaScript)
+- Business Application Studio (Python)
 
 ### Python Solution Diagram
 
 ![python_solution_diagram](./assets/code-based-agents-codejam-sd.png)
 
-### JavaScript Solution Diagram
+<!-- ### JavaScript Solution Diagram
 
 ![javascript_solution_diagram](./assets/code-based-agents-codejam-sd-js.png)
-
+ -->
 ## Session prerequisites
 
 For this CodeJam, the Developer Advocates provide a fully functioning system. You only need a laptop with a chromium-based browser installed.
 
 ## Exercises
 
-In this CodeJam you can choose between two different technology stacks. Both are relevant for working with Agents and AI solutions, the differences are the progamming language and the frameworks being used for building the AI agents.
+<!-- In this CodeJam you can choose between two different technology stacks. Both are relevant for working with Agents and AI solutions, the differences are the progamming language and the frameworks being used for building the AI agents.
 
 If you are unsure on which path you should choose, ask the instructor for guidance.
-
+ -->
 - [Exercise 00 - Understanding Generative AI Hub in SAP AI Core](./exercises/Python/00-understanding-genAI-hub.md)
 - [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./exercises/Python/01-setup-dev-space.md)
 - [Exercise 02 - Build your first AI Agent](./exercises/Python/02-build-a-basic-agent.md)
@@ -49,7 +48,7 @@ If you are unsure on which path you should choose, ask the instructor for guidan
 - [Exercise 05 - Add the Grounding service](./exercises/Python/05-add-the-grounding-service.md)
 - [Exercise 06 - Use your AI Agents to solve the crime](./exercises/Python/06-solve-the-crime.md)
 
-The instructor will start you on the first exercise, and that's the only one you should do. You should only proceed to the next exercise once the instructor tells you to.
+The instructor will start you on the first exercise. Proceed to the next exercise once the instructor tells you to.
 
 For this CodeJam you are provided with a subaccount on SAP BTP. The subaccount is only available for the duration of this CodeJam.
 
@@ -60,12 +59,15 @@ You can find a list of frequently asked questions in the [Frequently Asked Quest
 ## Further Learning on AI
 
 ### YouTube Videos
+SAP Developers YouTube channel: [SAP Business AI playlist](https://www.youtube.com/playlist?list=PL6RpkC85SLQCDxe58RfZaLCcPqcgwTIhj)
 
 ### Learning
+- [Learning Journey - Solving Business Problems using SAP's Generative AI Hub](https://learning.sap.com/learning-journeys/solving-business-problems-using-sap-s-generative-ai-hub)
+- [Basic Trial of Generative AI Hub](https://www.sap.com/products/artificial-intelligence/generative-ai-hub-trial.html)
 
-### Customer & Partner projects
+<!-- ### Customer & Partner projects -->
 
-### 3rd-Party content
+<!-- ### 3rd-Party content -->
 
 ## Feedback
 
@@ -77,8 +79,6 @@ Thank you!
 
 ## Other CodeJams
 
-### CodeJam repositories
-
 ### CodeJam Community
 
 - [SAP CodeJam Events](https://community.sap.com/t5/sap-codejam/eb-p/codejam-events)
@@ -87,8 +87,6 @@ Thank you!
 
 ## Known Issues
 
-- Exercise content not fully build yet.
-- Repository WIP
 
 ## How to obtain support
 
