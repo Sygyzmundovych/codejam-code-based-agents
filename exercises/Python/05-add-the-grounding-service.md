@@ -247,8 +247,6 @@ Here you'll see:
 
 ☝️ **Important**: Copy the **Pipeline ID** - you'll need it in the next step to connect your agent to this grounding service.
 
-![Grounding Module AI Launchpad](/exercises/data/images/.png)
-
 ---
 
 ## Add The Grounding Service To Your Agent Crew
