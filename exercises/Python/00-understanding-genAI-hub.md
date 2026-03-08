@@ -1,9 +1,11 @@
 # Understanding Generative AI Hub in SAP AI Core
+
 SAP AI Core is SAP's AI runtime. Here you can train your own models, fine-tune models or deploy machine learning models. [Generative AI Hub in SAP AI Core](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5) is the way to access large language models (LLMs) at SAP. Here you can find all the models of all the model providers we partner with as well as our own SAP-RPT-1 model or any fine-tuned models and a variety of self hosted open source models.
 
 [SAP AI Launchpad](https://help.sap.com/docs/ai-launchpad) is the UI for SAP AI Core and Generative AI Hub and is a multitenant SaaS application on SAP BTP. You can use it to try out or deploy models, to start training jobs, evaluation jobs, build orchestration pipelines and much more.
 
 ## Open SAP Business Technology Platform
+
 👉 Open SAP [BTP Cockpit](https://emea.cockpit.btp.cloud.sap/cockpit).
 
 👉 Navigate to the subaccount: [`GenAI CodeJam`](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
@@ -16,7 +18,9 @@ SAP AI Core is SAP's AI runtime. Here you can train your own models, fine-tune m
 
 Check whether you see an **SAP AI Core** service instance and an **SAP AI Launchpad** application subscription.
 
-With SAP AI Launchpad, you can administer all your machine learning operations. ☝️ You have the `extended` plan of SAP AI Core service instance, so that you can access capabilities of Generative AI Hub.
+With SAP AI Launchpad, you can administer all your machine learning operations.
+
+> ☝️ You have the `extended` plan of SAP AI Core service instance, so that you can access capabilities of Generative AI Hub.
 
 👉 You will need the SAP AI Core service key in the next exercise
 

@@ -1,8 +1,8 @@
 # Setup SAP Business Application Studio and your personald development space
 
-> [SAP Business Application Studio](https://help.sap.com/docs/bas/sap-business-application-studio/what-is-sap-business-application-studio) is based on Code-OSS, an open-source project used for building Visual Studio Code. Available as a cloud service, SAP Business Application Studio provides a desktop-like experience similar to leading IDEs, with command line and optimized editors.
+> [SAP Business Application Studio](https://help.sap.com/docs/bas/sap-business-application-studio/what-is-sap-business-application-studio) is based on Code-OSS, an open-source project used for building Visual Studio Code. Available as a cloud service, SAP Business Application Studio (BAS) provides a desktop-like experience similar to leading IDEs, with command line and optimized editors.
 
-> At the heart of SAP Business Application Studio are the dev spaces. The dev spaces are comparable to isolated virtual machines in the cloud containing tailored tools and preinstalled runtimes per business scenario, such as SAP Fiori, SAP S/4HANA extensions, Workflow, HANA native development and more. This simplifies and speeds up the setup of your development environment, enabling you to efficiently develop, test, build, and run your solutions locally or in the cloud.
+> At the heart of SAP Business Application Studio are the dev spaces. The dev spaces are comparable to isolated virtual machines in the cloud containing tailored tools and pre-installed runtimes per business scenario, such as SAP Fiori, SAP S/4HANA extensions, Workflow, HANA native development and more. This simplifies and speeds up the setup of your development environment, enabling you to efficiently develop, test, build, and run your solutions locally or in the cloud.
 
 ## Open SAP Business Application Studio
 
@@ -18,7 +18,9 @@
 
 ![Create a Dev Space 1](/exercises/data/images/bas.png)
 
-👉 Enter the name of the dev space `GenAICodeJam`, select the `Basic` kind of application and `Python Tools` from Additional SAP Extensions.
+👉 Enter the name of the dev space `GenAICodeJam_XX`, select the `Basic` kind of application and `Python Tools` from Additional SAP Extensions.
+
+> Replace the `XX` with your initials.
 
 👉 Click **Create Dev Space**.
 
@@ -46,7 +48,6 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 ![Open a project](/exercises/data/images/clone_git_2.png)
 
-
 ## Configure the connection details to Generative AI Hub
 
 👉 Go back to the Subaccount in the [BTP cockpit](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
@@ -61,16 +62,16 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 👉 Update the variables using the service key into `/project/Python/starter-project/.env`, which should look similar to the following.
 
-👉 Make sure you also assign the correct `AICORE_RESOURCE_GROUP`, we will use `code-based-agent-codejam` for this CodeJam.
+👉 Make sure you also assign the correct `AICORE_RESOURCE_GROUP`, we will use `ai-agents-codejam` for this CodeJam.
 
-☝️ You will update the `RPT-1_DEPLOYMENT_URL` in a later exercise.
+> ☝️ You will update the `RPT-1_DEPLOYMENT_URL` in a later exercise.
 
 ```Python
 LITELLM_PROVIDER="sap"
 AICORE_AUTH_URL="https://#####.authentication.eu10.hana.ondemand.com/oauth/token"
-AICORE_CLIENT_ID="sb-d33842ec-eadf-4a92-83dc-9cc9cbcac74a!b129223|aicore!b540"
+AICORE_CLIENT_ID="sb-3c636fc2-d352-496a-851d-7a7d6005dcd4!b505946|aicore!b540"
 AICORE_CLIENT_SECRET="#####"
-AICORE_RESOURCE_GROUP="code-based-agent-codejam"
+AICORE_RESOURCE_GROUP="ai-agents-codejam"
 AICORE_BASE_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com"
 RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2/inference/deployments/###/predict"
 ```
@@ -80,6 +81,14 @@ RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v
 👉 Start a new Terminal.
 
 ![Start terminal](/exercises/data/images/start_terminal.png)
+
+👉 Verify your Python version is compatible with CrewAI (requires Python 3.10, 3.11, 3.12, or 3.13):
+
+```bash
+python3 --version
+```
+
+> ⚠️ **Important**: CrewAI requires Python 3.10 or newer (up to 3.13). If your Python version is 3.9 or older, you'll need to install a compatible version. On macOS, you can use [Homebrew](https://brew.sh/) to install Python 3.11: `brew install python@3.11`, then use `python3.11` instead of `python3` in the commands below.
 
 👉 Create a virtual environment using the following command:
 
@@ -95,11 +104,15 @@ source ~/projects/codejam-code-based-agents/env/bin/activate
 
 ![venv](/exercises/data/images/venv.png)
 
-👉 Install LiteLLM and CrewAI using the following `pip install` commands.
+👉 Install LiteLLM, CrewAI, and python-dotenv using the following `pip install` commands.
 
 ```bash
-pip install litellm crewai
+pip install litellm crewai python-dotenv
 ```
+
+> In case you see a message in BAS asking you to create an isolated environment, click on `Don't show again`.
+
+![bas-message](/exercises/data/images/virtual-env-python-bas-warning.png)
 
 ## Let's start coding!
 

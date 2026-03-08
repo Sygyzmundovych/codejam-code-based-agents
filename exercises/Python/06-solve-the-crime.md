@@ -37,57 +37,132 @@ solve_crime:
   agent: lead_detective_agent
 ```
 
-### Step 3: Add the Agent to the Crew
+### Step 3: Add the Agent and Task to the Crew
 
-👉 Add this code to your [project/Python/starter-project/investigator_crew.py](project/Python/starter-project/investigator_crew.py)
+Now you'll add the Lead Detective Agent and its task to your investigator crew. This agent will coordinate the investigation by using results from the other agents.
 
-```python
-@task
-def solve_crime(self) -> Task:
-    return Task(
-        config=self.tasks_config['solve_crime'],
-        context=[self.appraise_loss_task(), self.analyze_evidence_task()] # this line will make sure that the other to agents run their tasks beforehand and the lead detective can use the output of those tasks.
-    )
+👉 Open [`/project/Python/starter-project/investigator_crew.py`](/project/Python/starter-project/investigator_crew.py)
 
-@agent
-def lead_detective_agent(self) -> Agent:
-    return Agent(
-        config=self.agents_config['lead_detective_agent'], 
-        verbose=True
-    )
-```
-
-
-
-### Step 4: Update the Crew Configuration
-
-👉 Update your crew in [project/Python/starter-project/investigator_crew.py](project/Python/starter-project/investigator_crew.py) to run the tasks sequentially by adding the process line below:
+👉 **Inside the `InvestigatorCrew` class**, add the new agent and task methods **after** the existing `analyze_evidence_task` method and **before** the `@crew` method:
 
 ```python
-@crew
-def crew(self) -> Crew:
-    return Crew(
-        agents=self.agents,  # Automatically collected by the @agent decorator
-        tasks=self.tasks,    # Automatically collected by the @task decorator.
-        process=Process.sequential,
-        verbose=True
-    )
+    @agent
+    def lead_detective_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['lead_detective_agent'],
+            verbose=True
+        )
+
+    @task
+    def solve_crime(self) -> Task:
+        return Task(
+            config=self.tasks_config['solve_crime'],
+            context=[self.appraise_loss_task(), self.analyze_evidence_task()]  # 👈 Lead detective uses results from other tasks
+        )
 ```
 
-👉 Ensure your `main()` function kicks off the crew with the appropriate inputs.
+> 💡 **Where to place this code**: Add these methods inside the `InvestigatorCrew` class, after your `analyze_evidence_task()` method. The final order should be:
+>
+> 1. `appraiser_agent()` method
+> 2. `appraise_loss_task()` method
+> 3. `evidence_analyst_agent()` method
+> 4. `analyze_evidence_task()` method
+> 5. **👈 Add `lead_detective_agent()` here**
+> 6. **👈 Add `solve_crime()` here**
+> 7. `crew()` method (keep at the end)
+
+> 💡 **Understanding the `context` parameter:**
+>
+> - `context=[self.appraise_loss_task(), self.analyze_evidence_task()]` tells CrewAI that the `solve_crime` task depends on the other two tasks
+> - The Lead Detective will receive the output from both the Loss Appraiser and Evidence Analyst
+> - This enables the detective to combine financial predictions with evidence analysis to solve the crime
+
+### Step 4: Verify Crew Configuration
+
+Your crew configuration should already be set from Exercise 04, but let's verify it's correct.
+
+👉 In [`/project/Python/starter-project/investigator_crew.py`](/project/Python/starter-project/investigator_crew.py), check that your `@crew` method looks like this:
+
+```python
+    @crew
+    def crew(self) -> Crew:
+        return Crew(
+            agents=self.agents,  # Automatically collected by @agent decorator (all 3 agents)
+            tasks=self.tasks,    # Automatically collected by @task decorator (all 3 tasks)
+            process=Process.sequential,  # Tasks run in order: appraise → analyze → solve
+            verbose=True  # Print detailed execution logs
+        )
+```
+
+> ✅ **If this is already in your file, you're good!** CrewAI will automatically collect all decorated agents and tasks.
+
+### Step 5: Verify main.py (No Changes Needed)
+
+Your `main.py` from Exercise 04 should already be correct. It doesn't need any changes for Exercise 06!
+
+> 💡 **What's happening:** The same `main.py` that ran 2 agents in Exercise 04 will now automatically run all 3 agents (including your new Lead Detective). CrewAI collects all `@agent` and `@task` decorated methods automatically.
+
+👉 (Optional) Double-check your [`/project/Python/starter-project/main.py`](/project/Python/starter-project/main.py) has both required inputs:
+
+```python
+result = InvestigatorCrew().crew().kickoff(inputs={
+    'payload': payload,
+    'suspect_names': "Sophie Dubois, Marcus Chen, Viktor Petrov"
+})
+```
+
+✅ If you see these two inputs, you're all set—no changes needed!
 
 ---
 
 ## Solve the Crime
 
-👉 Run your crew!
+👉 Run your crew to start the investigation!
+
 ```bash
 python project/Python/starter-project/main.py
 ```
 
-👉 Call for the instructor and tell them your suspect.
+> ⏱️ **This may take 2-5 minutes** as your agents:
+>
+> 1. Search evidence documents for each suspect
+> 2. Predict values of stolen items using RPT-1
+> 3. Analyze findings and identify the culprit
 
-👉 Is it correct? If yes: Congratulations!, if not: Update your prompt and try again.
+👉 Review the final output—who does your Lead Detective identify as the thief?
+
+👉 Call for the instructor and share your suspect.
+
+### If Your Answer is Incorrect
+
+If your Lead Detective identifies the wrong suspect, you'll need to refine your agent prompts to improve their reasoning.
+
+**Which prompts to adjust:**
+
+1. **Lead Detective's Goal** ([`config/agents.yaml`](/project/Python/starter-project/config/agents.yaml))
+   - Make it more specific about what evidence to prioritize
+   - Example: Add "Focus on alibis, financial motives, and access to the museum"
+
+2. **Lead Detective's Task Description** ([`config/tasks.yaml`](/project/Python/starter-project/config/tasks.yaml))
+   - Add explicit steps for analysis
+   - Example: "Compare each suspect's alibi against security logs. Identify who had opportunity, means, and motive."
+
+3. **Evidence Analyst's Task** ([`config/tasks.yaml`](/project/Python/starter-project/config/tasks.yaml))
+   - Ensure it searches thoroughly for each suspect
+   - Example: "For each suspect, search for: alibi verification, financial records, access logs, and connections"
+
+**Tips for improving prompts:**
+
+- ✅ Be specific about what to analyze (alibi, motive, opportunity)
+- ✅ Ask agents to cite specific documents
+- ✅ Request cross-referencing of information
+- ✅ Instruct agents to explain their reasoning step-by-step
+- ❌ Avoid vague instructions like "solve the crime" without guidance
+- ❌ Don't assume agents know which evidence is most important
+
+👉 After updating prompts in the YAML files, run `python project/Python/starter-project/main.py` again
+
+👉 Verify the answer with the instructor
 
 ---
 
@@ -116,6 +191,7 @@ Lead Detective → Evidence Analysis → Grounding Search → Suspect Investigat
 ### Why This Matters
 
 Multi-agent systems are powerful because they:
+
 - **Distribute Responsibilities** across specialized agents with distinct roles
 - **Enable Collaboration** through task delegation and information sharing
 - **Improve Reasoning** by combining multiple expert perspectives
@@ -139,6 +215,7 @@ Multi-agent systems are powerful because they:
 ## Next Steps
 
 In the following exercises, you will:
+
 1. ✅ Build a basic agent
 2. ✅ Add custom tools to your agents so they can access external data
 3. ✅ Create a complete crew with multiple agents working together
@@ -146,6 +223,7 @@ In the following exercises, you will:
 5. ✅ Solve the museum art theft mystery using your fully-featured agent team (this exercise)
 
 Congratulations on completing the CodeJam! You've successfully built a sophisticated multi-agent AI system that can:
+
 - Analyze evidence from documents
 - Predict financial values using the SAP-RPT-1 model
 - Coordinate between multiple specialized agents
@@ -155,22 +233,38 @@ Congratulations on completing the CodeJam! You've successfully built a sophistic
 
 ## Troubleshooting
 
+**Issue**: `AttributeError: 'NoneType' object has no attribute 'get'` when running main.py
+
+- **Solution**: This error occurs when YAML configuration has incorrect indentation. Check your `config/tasks.yaml` file and ensure all fields (`description`, `expected_output`, `agent`) are indented with **2 spaces** under each task name:
+  ```yaml
+  solve_crime:
+    description: > # ← Must be indented 2 spaces
+      Your task description
+    expected_output: > # ← Must be indented 2 spaces
+      Expected output
+    agent: lead_detective_agent # ← Must be indented 2 spaces
+  ```
+
 **Issue**: Agent is not using the Grounding Service tool
+
 - **Solution**: Ensure the Evidence Analyst Agent has `tools=[call_grounding_service]` in its definition and the task description explicitly mentions searching for evidence
 
 **Issue**: Lead Detective Agent doesn't delegate to other agents
+
 - **Solution**: Verify that:
   - All agents are included in the crew: `agents=[appraiser_agent, evidence_analyst_agent, lead_detective_agent]`
   - Tasks are assigned to the correct agents
   - Task descriptions clearly indicate which agents should be consulted
 
 **Issue**: RPT-1 tool is not returning predictions
+
 - **Solution**: Ensure:
   - The Loss Appraiser Agent has `tools=[call_rpt1]` assigned
   - Your `.env` file contains valid RPT-1 deployment URL and credentials
   - The payload structure matches the RPT-1 API specification
 
 **Issue**: Grounding search returns no relevant documents
+
 - **Solution**: Check that:
   - The pipeline ID is correct
   - Documents are properly indexed in SAP AI Launchpad
@@ -178,9 +272,11 @@ Congratulations on completing the CodeJam! You've successfully built a sophistic
   - The `maxChunkCount` parameter is appropriate
 
 **Issue**: Agents not executing in order or parallel execution
+
 - **Solution**: Ensure you've set `process=Process.sequential` in your `@crew` method. Use `Process.hierarchical` if you need a manager agent to coordinate.
 
 **Issue**: Agent is hallucinating or not finding the correct suspect
+
 - **Solution**: Refine your Lead Detective Agent's prompt to:
   - Be more specific about what evidence to look for
   - Include explicit instructions to cross-reference alibis and motives
@@ -188,6 +284,7 @@ Congratulations on completing the CodeJam! You've successfully built a sophistic
   - Consider adjusting the task description to guide the investigation more clearly
 
 **Issue**: CrewAI raises errors about task assignment or agent delegation
+
 - **Solution**: Verify that:
   - All task configurations in `tasks.yaml` match task method names
   - All agent configurations in `agents.yaml` match agent method names

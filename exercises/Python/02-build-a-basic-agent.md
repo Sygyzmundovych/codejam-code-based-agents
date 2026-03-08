@@ -1,18 +1,20 @@
 # Build your first AI Agent
 
-In any good burglary you need a loss appraiser who determines the insurance claims. That will be the first agent we build.
+For this CodeJam, you will build three agents. Each of these agents will take an active part in solving a burglary and executing a loss appraisal for an insurance claim.
+
+After any good burglary you need a loss appraiser who determines the insurance claims. That will be the first agent you are going to build.
 
 ---
 
 ## Overview
 
-In this exercise, you will build an agent with Python, LiteLLM and CrewAI. 
+In this exercise, you will build an agent with Python, LiteLLM and CrewAI.
 
-> **LiteLLM** is a library that provides a unified, provider-agnostic API for calling large language models (LLMs) and handling common tasks (completion, chat, streaming, multimodal inputs). It standardizes request/response handling and includes utilities that speed up integration with agent frameworks and tooling. Essentially it is a gateway between LLM providers and AI Agent frameworks.
+> [**LiteLLM**](https://docs.litellm.ai/docs/) is a library that provides a unified, provider-agnostic API for calling large language models (LLMs) and handling common tasks (completion, chat, streaming, multimodal inputs). It standardizes request/response handling and includes utilities that speed up integration with agent frameworks and tooling. Essentially it is a gateway between LLM providers and AI Agent frameworks.
 
-That means you can use your Generative AI Hub credentials to build state of the art AI Agents with any of the models available through GenAI Hub and any of the AI Agent frameworks compatible with LiteLLM. This combination is extremely powerful because that means you can use LLMs hosted or managed by SAP (Mistral, Llama, Nvidia) and models from our partners such as Azure OpenAI, Amazon Bedrock (including Anthropic) and Gemini.
+That means you can use your Generative AI Hub credentials to build state of the art AI Agents with any of the models available through GenAI Hub and any of the AI Agent frameworks compatible with LiteLLM. This combination is extremely powerful because that means you can use LLMs hosted, managed by SAP (Mistral, Llama, Nvidia), and models from our partners such as Azure OpenAI, Amazon Bedrock (including Anthropic) and Gemini.
 
-> **CrewAI** is a third-party open-source Python library. As the name suggests you can use it to build a crew of agents that have a set of tools available to accomplish certain tasks. CrewAI uses tasks to bridge the gap between high-level goals and concrete agent actions, assigning specific objectives and expected outputs. You will use CrewAI as the AI Agent framework for your agent. For now your agent will only be able to respond to incoming queries.
+> [**CrewAI**](https://crewai.com/) is a third-party open-source Python library. As the name suggests you can use it to build a crew of agents that have a set of tools available to accomplish certain tasks. CrewAI uses tasks to bridge the gap between high-level goals and concrete agent actions, assigning specific objectives and expected outputs. You will use CrewAI as the AI Agent framework for your agents going forward. For now your agent will only be able to respond to incoming queries.
 
 ---
 
@@ -20,21 +22,30 @@ That means you can use your Generative AI Hub credentials to build state of the 
 
 ### Step 1: Import Libraries and Load Environmental Variables
 
-👉 Create a new file [`/project/Python/starter-project/basic_agent.py`](/project/Python/starter-project/agent.py) (You can just click on the file link to create the file)
+👉 Create a new file [`/project/Python/starter-project/agents.py`](/project/Python/starter-project/agents.py) (You can just click on the file link to create the file)
 
 👉 Add the following lines of code to import the necessary packages and load the infos from your environment (.env) file:
 
 ```python
+import os
+from pathlib import Path
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew
 
-# Load environment variables
-load_dotenv()
+# Load .env from the same directory as this script
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
 ```
 
 ### Step 2: Building the Agent
 
-Every agent needs to have at least a **role**, a **goal**, and a **backstory**. Important is also the parameter **llm**. Here you can specify which model provider and which LLM you want to use (syntax: **provider/llm**). We will specify sap as the LLM provider with over 30 models to pick from. LiteLLM is directing calls to the LLMs through the orchestration service of `Generative AI Hub`. That means you do not need to deploy your models on SAP AI Core. You only need the out of the box deployment of the orchestration service. This way you can easily switch between all the models available via the orchestration service.
+Every agent needs to have at least a **role**, a **goal**, and a **backstory**.
+
+- **Role**: Defines the agent's identity and expertise domain (e.g., "Loss Appraiser", "Detective"). This shapes how the agent approaches tasks.
+- **Goal**: Specifies what the agent should accomplish. A clear goal helps the LLM stay focused on the desired outcome.
+- **Backstory**: Provides context and personality to the agent, influencing its reasoning style and decision-making approach.
+
+Important is also the parameter **llm**. Here you can specify which model provider and which LLM you want to use (syntax: **provider/llm**). We will specify `sap` as the LLM provider with over 30 models to pick from. LiteLLM is directing calls to the LLMs through the orchestration service of `Generative AI Hub`. That means you do not need to deploy your models on SAP AI Core. You only need the out of the box deployment of the orchestration service. This way you can easily switch between all the models available via the orchestration service.
 
 👉 Below that add the code for your first agent
 
@@ -42,13 +53,14 @@ Every agent needs to have at least a **role**, a **goal**, and a **backstory**. 
 # Create a Loss Appraiser Agent
 appraiser_agent = Agent(
     role="Stolen Goods Loss Appraiser",
-    goal=f"Predict the monetary value of stolen items ONLY by calling the call_rpt1 tool with payload {payload}. Do NOT invent or estimate values yourself. If the tool call fails, report the failure.",
-    backstory="You are an insurance appraiser who relies strictly on model predictions. You never guess values.",
+    goal="Assess the value of stolen items and provide a professional insurance appraisal report.",
+    backstory="You are an experienced insurance appraiser specializing in fine art and valuables. You provide detailed assessments based on your expertise.",
     llm="sap/gpt-4o",  # provider/llm - Using one of the models from SAP's model library in Generative AI Hub
-    tools=[call_rpt1],
     verbose=True
 )
 ```
+
+> 👆 You might have noticed that the properties of the agent are defined in natural language. This is because the LLM is reading the properties of the agent in natural language to understand what the agent does, what it goal is and it's goal.
 
 ### Step 3: Configuring a Task
 
@@ -57,11 +69,13 @@ Every CrewAI agent needs at least one task, otherwise the agent will be inactive
 ```python
 # Create a task for the appraiser
 appraise_loss_task = Task(
-    description="Analyze the theft crime scene and predict the missing values of stolen items using the RPT-1 model via the call_rpt1 tool. Use this dict as input.",
-    expected_output="JSON with predicted values for the stolen items.",
+    description="Provide a brief explanation of how an insurance appraiser would approach assessing stolen artwork and valuables.",
+    expected_output="A professional explanation of the appraisal process.",
     agent=appraiser_agent
 )
 ```
+
+> 👆 The task description is written in natural language for the **LLM** (GPT-4o) to read and understand. The LLM acts as the reasoning engine that interprets instructions and generates appropriate responses based on the agent's role, goal, and backstory.
 
 ### Step 4: Create the Crew and Add Your Agent
 
@@ -95,13 +109,18 @@ if __name__ == "__main__":
 
 👉 Execute the crew with the basic agent:
 
+> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents-1`) when running this command. If you're already in the `starter-project` folder, use `python agents.py` instead.
+
 ```bash
-python project/Python/starter-project/basic_agent.py
+python project/Python/starter-project/agents.py
 ```
 
 You should see:
+
 - The appraiser agent thinking through the task
-- A JSON with predicted prices being printed out.
+- A professional explanation of the appraisal process
+
+> 👆 At the moment the LLM is just hallucinating because the actual RPT-1 tool is not defined yet. You will implement this in the next exercise.
 
 ---
 
@@ -109,16 +128,16 @@ You should see:
 
 ### What Just Happened?
 
-You created a basic agent that:
+You created and ran a working AI agent that:
 
-1. **Initialized** with a role, goal, and backstory
-2. **Received** a task to process
-3. **Returned** a structured response
+1. **Agent Definition**: Has a role, goal, and backstory that defines its identity and expertise
+2. **Task Processing**: Received a task description and used the LLM to generate an appropriate response
+3. **Crew Execution**: Ran the agent through CrewAI's orchestration framework
 
-### The Agent Workflow
+The basic workflow is:
 
 ```
-Input → Agent Processing → LLM Call → Response → Output
+Task → Agent (Role/Goal/Backstory) → LLM Processing (GPT-4o) → Response → Output
 ```
 
 ---
@@ -135,6 +154,7 @@ Input → Agent Processing → LLM Call → Response → Output
 ## Next Steps
 
 In the following exercises, you will:
+
 1. ✅ Build a basic agent (this exercise)
 2. 📌 [Add custom tools](03-add-your-first-tool.md) to your agents so they can access external data
 3. 📌 Create a complete crew with multiple agents working together
@@ -146,11 +166,8 @@ In the following exercises, you will:
 ## Troubleshooting
 
 **Issue**: `ModuleNotFoundError: No module named 'crewai'`
+
 - **Solution**: Ensure you're in the correct Python environment: `source venv/bin/activate` and run `pip install crewai litellm`
-
-**Issue**: Authentication error with SAP GenAI Hub
-- **Solution**: Verify your `.env` file contains valid credentials from Exercise 01
-
 
 ---
 
