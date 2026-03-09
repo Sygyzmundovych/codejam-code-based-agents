@@ -626,7 +626,7 @@ In the following exercises, you will:
   - `AICORE_CLIENT_SECRET`
   - `AICORE_AUTH_URL`
   - `RPT1_DEPLOYMENT_URL`
-  - `AICORE_RESOURCE_GROUP` (make sure you set it to ai-agent-codejam)
+  - `AICORE_RESOURCE_GROUP` (make sure you set it to ai-agents-codejam)
 
 **Issue**: Tool returns error `400` or `422`
 
