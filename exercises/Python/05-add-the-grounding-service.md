@@ -106,7 +106,7 @@ When your agent asks a question, here's what happens:
                    Return to Agent
 ```
 
-> ⚡ **Speed:** Vector search is incredibly fast—searches millions of documents in ~50ms!
+> ⚡ **Speed:** Vector search is incredibly fast—searches millions of documents!
 
 #### **Phase 3: Context-Enhanced Response**
 
@@ -142,7 +142,7 @@ When your agent asks a question, here's what happens:
            Agent receives factual response
 ```
 
-> 🎯 **Key Insight:** The LLM can **only** use information from the retrieved chunks—it can't make things up!
+> 🎯 **Key Insight:** The LLM can **only** use information from the retrieved chunks. It can't make things up which is called hallucination!
 
 ### The Grounding Pipeline
 
