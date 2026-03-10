@@ -24,7 +24,7 @@ In order for the agent to run predictions on actual data, you need to be able to
 
 ### Step 1: Update the Agent and Task to Reference the Tool and Data
 
-👉 Navigate to your [`agents.py`](/project/Python/starter-project/agents.py) file.
+👉 Navigate to your [`basic_agent.py`](/project/Python/starter-project/basic_agent.py) file.
 
 👉 Update the agent's goal and task description to reference the `call_rpt1` tool and a `payload` variable. Add `{payload}` to the strings and convert them to **f-strings** (formatted strings) by adding `f` to the beginning.
 
@@ -261,7 +261,7 @@ payload = {
     }
 ```
 
-👉 Now update your `agents.py` file to import the payload from this new file. Add this import at the top:
+👉 Now update your `basic_agent.py` file to import the payload from this new file. Add this import at the top:
 
 ```python
 from payload import payload
@@ -289,10 +289,10 @@ if __name__ == "__main__":
 
 👉 Run your crew to test it.
 
-> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents`) when running this command. If you're already in the `starter-project` folder, use `python agents.py` instead.
+> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents`) when running this command. If you're already in the `starter-project` folder, use `python basic_agent.py` instead.
 
 ```bash
-python project/Python/starter-project/agents.py
+python project/Python/starter-project/basic_agent.py
 ```
 
 ☝️ You added an input variable to your agent but the agent is still not using a tool. Let's build the actual tool next.
@@ -362,7 +362,7 @@ class RPT1Client:
 
 To add a custom tool to an agent, you create a function that encapsulates the functionality you want to expose. This function will be available for the agent to call when completing its task.
 
-👉 Import the SAP-RPT-1 client at the top of your `agents.py` file:
+👉 Import the SAP-RPT-1 client at the top of your `basic_agent.py` file:
 
 ```python
 from rpt_client import RPT1Client
@@ -393,7 +393,7 @@ def call_rpt1(payload: dict) -> str:
 
 ### Step 2: Make the Function a Tool
 
-👉 Add the following line of codeto your import section at the top of your `agents.py` file:
+👉 Add the following line of codeto your import section at the top of your `basic_agent.py` file:
 
 ```python
 from crewai.tools import tool
@@ -452,7 +452,7 @@ appraiser_agent = Agent(
 )
 ```
 
-👉 Your code in `agents.py` should now look like this:
+👉 Your code in `basic_agent.py` should now look like this:
 
 ```python
 import os
@@ -541,10 +541,10 @@ RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v
 
 👉 Run your crew to test it.
 
-> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents`) when running this command. If you're already in the `starter-project` folder, use `python agents.py` instead.
+> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents`) when running this command. If you're already in the `starter-project` folder, use `python basic_agent.py` instead.
 
 ```bash
-python project/Python/starter-project/agents.py
+python project/Python/starter-project/basic_agent.py
 ```
 
 👉 Understand the output of the agent using SAP-RPT-1 as a tool.

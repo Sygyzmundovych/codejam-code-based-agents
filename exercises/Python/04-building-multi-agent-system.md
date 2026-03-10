@@ -35,7 +35,7 @@ appraiser_agent:
   llm: sap/gpt-4o
 ```
 
-> 💡 **What's happening here?** We're taking the agent definition from your `agents.py` file (the `role`, `goal`, `backstory`, and `llm` parameters) and moving them to this YAML file. The `>` symbol in YAML allows multi-line text.
+> 💡 **What's happening here?** We're taking the agent definition from your `basic_agent.py` file (the `role`, `goal`, `backstory`, and `llm` parameters) and moving them to this YAML file. The `>` symbol in YAML allows multi-line text.
 
 #### Configure the Task
 
@@ -54,11 +54,11 @@ appraise_loss_task:
 
 > 💡 **Note**: The `agent` field references the agent key from `agents.yaml` (in this case, `appraiser_agent`).
 
-#### Clean Up agents.py
+#### Clean Up basic_agent.py
 
 Now that we've moved the agent and task definitions to YAML files, we'll be moving all the remaining code to a new file structure.
 
-> 💡 **What's happening?** In the next steps, you'll create `investigator_crew.py` which will contain all the code currently in `agents.py` (imports, environment loading, RPT1Client initialization, and the @tool function) plus the new crew structure. Once that's done, `agents.py` will no longer be needed.
+> 💡 **What's happening?** In the next steps, you'll create `investigator_crew.py` which will contain all the code currently in `basic_agent.py` (imports, environment loading, RPT1Client initialization, and the @tool function) plus the new crew structure. Once that's done, `basic_agent.py` will no longer be needed.
 
 ### Move Code to investigator_crew.py File
 
@@ -115,9 +115,9 @@ def call_rpt1(payload: dict) -> str:
 
 ```
 
-👉 **Delete** [`/project/Python/starter-project/agents.py`](/project/Python/starter-project/agents.py) entirely.
+👉 **Delete** [`/project/Python/starter-project/basic_agent.py`](/project/Python/starter-project/basic_agent.py) entirely.
 
-> 💡 **Why?** All functionality from `agents.py` has been moved to `investigator_crew.py`. Keeping the old file would cause confusion and potential import conflicts.
+> 💡 **Why?** All functionality from `basic_agent.py` has been moved to `investigator_crew.py`. Keeping the old file would cause confusion and potential import conflicts.
 
 #### Step 3: Build The Crew Itself
 
