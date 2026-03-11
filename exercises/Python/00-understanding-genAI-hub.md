@@ -6,9 +6,7 @@ SAP AI Core is SAP's AI runtime. Here you can train your own models, fine-tune m
 
 ## Open SAP Business Technology Platform
 
-👉 Open SAP [BTP Cockpit](https://emea.cockpit.btp.cloud.sap/cockpit).
-
-👉 Navigate to the subaccount: [`GenAI CodeJam`](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
+👉 Open the SAP BTP subaccount: [`GenAI CodeJam`](https://emea.cockpit.btp.cloud.sap/cockpit/?idp=a7rg4vxjp.accounts.ondemand.com#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589?layout=TwoColumnsMidExpanded).
 
 ## Check Out the Subaccount
 
