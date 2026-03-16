@@ -88,7 +88,14 @@ RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v
 python3 --version
 ```
 
-> ⚠️ **Important**: CrewAI requires Python 3.10 or newer (up to 3.13). If your Python version is 3.9 or older, you'll need to install a compatible version. On macOS, you can use [Homebrew](https://brew.sh/) to install Python 3.11: `brew install python@3.11`, then use `python3.11` instead of `python3` in the commands below.
+> ⚠️ **Important**: CrewAI requires Python 3.10 or newer (up to 3.13). If your Python version is 3.9 or older, install a compatible version first.
+>
+> - **macOS**: Use [Homebrew](https://brew.sh/) to install Python 3.11: `brew install python@3.11`, then use `python3.11` in the commands below.
+> - **Linux**: Install Python 3.11 with your distro package manager, for example:
+>   - Ubuntu/Debian: `sudo apt update && sudo apt install python3.11 python3.11-venv`
+>   - Fedora/RHEL: `sudo dnf install python3.11`
+>   Then use `python3.11` in the commands below.
+> - **Windows**: Install Python 3.11 from the [official Python downloads page](https://www.python.org/downloads/windows/) and make sure **Add python.exe to PATH** is enabled during installation. Then use `python` (or `py -3.11`) in the commands below.
 
 👉 Create a virtual environment using the following command:
 
@@ -96,10 +103,39 @@ python3 --version
 python3 -m venv ~/projects/codejam-code-based-agents/env --upgrade-deps
 ```
 
+Use the variant that matches your OS/shell if not in BAS:
+
+```bash
+# macOS / Linux
+python3 -m venv ~/projects/codejam-code-based-agents/env --upgrade-deps
+```
+
+```powershell
+# Windows (PowerShell)
+python -m venv $HOME\projects\codejam-code-based-agents\env
+```
+
 👉 Activate the `env` virtual environment like this and make sure it is activated:
 
 ```bash
 source ~/projects/codejam-code-based-agents/env/bin/activate
+```
+
+Use the activation command for your environment:
+
+```bash
+# macOS / Linux
+source ~/projects/codejam-code-based-agents/env/bin/activate
+```
+
+```powershell
+# Windows (PowerShell)
+$HOME\projects\codejam-code-based-agents\env\Scripts\Activate.ps1
+```
+
+```cmd
+:: Windows (Command Prompt)
+%USERPROFILE%\projects\codejam-code-based-agents\env\Scripts\activate.bat
 ```
 
 ![venv](/exercises/data/images/venv.png)
@@ -114,6 +150,6 @@ pip install litellm crewai python-dotenv
 
 ![bas-message](/exercises/data/images/virtual-env-python-bas-warning.png)
 
-## Let's start coding!
+## Let's start coding
 
 [Next exercise](02-build-a-basic-agent.md)
