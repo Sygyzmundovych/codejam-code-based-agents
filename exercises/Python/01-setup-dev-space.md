@@ -103,7 +103,7 @@ python3 --version
 python3 -m venv ~/projects/codejam-code-based-agents/env --upgrade-deps
 ```
 
-Use the variant that matches your OS/shell if not in BAS:
+Or use the variant that matches your OS/shell if not in BAS:
 
 ```bash
 # macOS / Linux
@@ -112,7 +112,7 @@ python3 -m venv ~/projects/codejam-code-based-agents/env --upgrade-deps
 
 ```powershell
 # Windows (PowerShell)
-python -m venv $HOME\projects\codejam-code-based-agents\env
+python -m venv .\env --upgrade-deps
 ```
 
 👉 Activate the `env` virtual environment like this and make sure it is activated:
@@ -130,13 +130,15 @@ source ~/projects/codejam-code-based-agents/env/bin/activate
 
 ```powershell
 # Windows (PowerShell)
-$HOME\projects\codejam-code-based-agents\env\Scripts\Activate.ps1
+.\env\Scripts\Activate.ps1
 ```
 
 ```cmd
 :: Windows (Command Prompt)
-%USERPROFILE%\projects\codejam-code-based-agents\env\Scripts\activate.bat
+.\env\Scripts\activate.bat
 ```
+
+> ℹ️ If PowerShell blocks script execution, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` and then run `./env/Scripts/Activate.ps1` again.
 
 ![venv](/exercises/data/images/venv.png)
 
