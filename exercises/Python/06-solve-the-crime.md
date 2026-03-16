@@ -119,8 +119,38 @@ result = InvestigatorCrew().crew().kickoff(inputs={
 
 👉 Run your crew to start the investigation!
 
+**From repository root:**
+
 ```bash
-python project/Python/starter-project/main.py
+# macOS / Linux
+python3 ./project/Python/starter-project/main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\project\Python\starter-project\main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\project\Python\starter-project\main.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python main.py
 ```
 
 > ⏱️ **This may take 2-5 minutes** as your agents:
@@ -160,7 +190,41 @@ If your Lead Detective identifies the wrong suspect, you'll need to refine your 
 - ❌ Avoid vague instructions like "solve the crime" without guidance
 - ❌ Don't assume agents know which evidence is most important
 
-👉 After updating prompts in the YAML files, run `python project/Python/starter-project/main.py` again
+👉 After updating prompts in the YAML files, run the crew again:
+
+**From repository root:**
+
+```bash
+# macOS / Linux
+python3 ./project/Python/starter-project/main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\project\Python\starter-project\main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\project\Python\starter-project\main.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python main.py
+```
 
 👉 Verify the answer with the instructor
 
@@ -180,7 +244,7 @@ You created a complete multi-agent system where:
 
 ### The Investigation Flow
 
-```
+```text
 Lead Detective → Evidence Analysis → Grounding Search → Suspect Investigation
               ↓
          Loss Appraisal → RPT-1 Predictions → Value Determination
@@ -236,14 +300,15 @@ Congratulations on completing the CodeJam! You've successfully built a sophistic
 **Issue**: `AttributeError: 'NoneType' object has no attribute 'get'` when running main.py
 
 - **Solution**: This error occurs when YAML configuration has incorrect indentation. Check your `config/tasks.yaml` file and ensure all fields (`description`, `expected_output`, `agent`) are indented with **2 spaces** under each task name:
-  ```yaml
-  solve_crime:
-    description: > # ← Must be indented 2 spaces
-      Your task description
-    expected_output: > # ← Must be indented 2 spaces
-      Expected output
-    agent: lead_detective_agent # ← Must be indented 2 spaces
-  ```
+
+```yaml
+solve_crime:
+  description: > # ← Must be indented 2 spaces
+    Your task description
+  expected_output: > # ← Must be indented 2 spaces
+    Expected output
+  agent: lead_detective_agent # ← Must be indented 2 spaces
+```
 
 **Issue**: Agent is not using the Grounding Service tool
 

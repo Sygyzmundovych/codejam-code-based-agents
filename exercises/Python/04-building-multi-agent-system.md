@@ -294,8 +294,38 @@ analyze_evidence_task:
 
 👉 Run your crew to test it.
 
+**From repository root:**
+
 ```bash
-python project/Python/starter-project/main.py
+# macOS / Linux
+python3 ./main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\main.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python main.py
 ```
 
 > 💡 **Note:** The Evidence Analyst currently uses `call_rpt1` as a placeholder tool to make the code functional. This isn't the right tool for evidence analysis. You'll replace it with the `call_grounding_service` tool in Exercise 05 to give the agent proper access to evidence documents.

@@ -289,10 +289,40 @@ if __name__ == "__main__":
 
 👉 Run your crew to test it.
 
-> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents`) when running this command. If you're already in the `starter-project` folder, use `python basic_agent.py` instead.
+> ☝️ Make sure you run from the starter-project folder, or use the full path from the repository root.
+
+**From repository root:**
 
 ```bash
-python project/Python/starter-project/basic_agent.py
+# macOS / Linux
+python3 ./project/Python/starter-project/basic_agent.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\project\Python\starter-project\basic_agent.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\project\Python\starter-project\basic_agent.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 basic_agent.py
+```
+
+```powershell
+# Windows (PowerShell)
+python basic_agent.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python basic_agent.py
 ```
 
 ☝️ You added an input variable to your agent but the agent is still not using a tool. Let's build the actual tool next.
@@ -541,10 +571,40 @@ RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v
 
 👉 Run your crew to test it.
 
-> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents`) when running this command. If you're already in the `starter-project` folder, use `python basic_agent.py` instead.
+> ☝️ Make sure you run from the starter-project folder, or use the full path from the repository root.
+
+**From starter-project folder:**
 
 ```bash
-python project/Python/starter-project/basic_agent.py
+# macOS / Linux
+python3 basic_agent.py
+```
+
+```powershell
+# Windows (PowerShell)
+python basic_agent.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python basic_agent.py
+```
+
+**From repository root:**
+
+```bash
+# macOS / Linux
+python3 ./project/Python/starter-project/basic_agent.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\project\Python\starter-project\basic_agent.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\project\Python\starter-project\basic_agent.py
 ```
 
 👉 Understand the output of the agent using SAP-RPT-1 as a tool.
@@ -565,7 +625,7 @@ You extended your agent with:
 
 ### The Tool Flow
 
-```
+```text
 Agent Task → LLM Reasoning → Tool Decision → Tool Execution → Result → Agent Processing → LLM Reasoning → Output
 ```
 

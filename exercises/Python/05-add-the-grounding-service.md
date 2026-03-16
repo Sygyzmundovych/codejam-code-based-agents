@@ -421,8 +421,38 @@ def evidence_analyst_agent(self) -> Agent:
 
 👉 Run your crew to test the grounding service!
 
+**From repository root:**
+
 ```bash
-python project/Python/starter-project/main.py
+# macOS / Linux
+python3 ./project/Python/starter-project/main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\project\Python\starter-project\main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\project\Python\starter-project\main.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python main.py
 ```
 
 Your Evidence Analyst should now search through actual evidence documents and cite specific sources (like "MARCUS_TERMINATION_LETTER.txt") instead of making up information!
@@ -443,7 +473,7 @@ You integrated a grounding service tool with your agent that:
 
 ### The Grounding Flow
 
-```
+```text
 User Query → LLM Reasoning → Agent Processing → Grounding Tool Call → Vector Search → Document Chunks → Agent Processing → LLM Reasoning → Output
 ```
 
