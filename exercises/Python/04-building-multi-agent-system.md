@@ -218,7 +218,7 @@ if __name__ == "__main__":
 
 ### Step 1: Adding a New Agent
 
-We also have a lot of evidence in our evidence database. You can check the documents that are part of the evidence [here](exercises/data/documents).
+We also have a lot of evidence in our evidence database. You can check the documents that are part of the evidence [here](/exercises/data/documents).
 
 To analyze the evidence and find all the information on our three suspects:
 
