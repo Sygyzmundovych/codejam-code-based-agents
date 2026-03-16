@@ -78,69 +78,35 @@ Before your agent can search documents, they must be prepared:
 
 When your agent asks a question, here's what happens:
 
+```mermaid
+flowchart TD
+    A["Agent Question: \"What evidence exists about Marcus Chen?\""]
+    B["1. Convert Query to Vector Embedding<br/>\"Marcus Chen evidence\" → [0.23, -0.45, 0.87, ...]"]
+    C["2. Search Vector Database (Similarity Search)<br/>Find document chunks with similar vectors<br/>(Cosine similarity scores 0.0 - 1.0)"]
+    D["3. Retrieve Top 5 Most Relevant Chunks<br/>✓ MARCUS_TERMINATION_LETTER.txt (score: 0.92)<br/>✓ SECURITY_LOG.txt - Marcus entries (score: 0.88)<br/>✓ BANK_RECORDS.txt - Marcus account (score: 0.85)<br/>✓ MARCUS_EXIT_LOG.txt (score: 0.83)<br/>✓ PHONE_RECORDS.txt - Marcus calls (score: 0.79)"]
+    E["Return to Agent"]
+
+    A --> B --> C --> D --> E
 ```
-┌─────────────────────────────────────────────────────────────┐
-│ Agent Question: "What evidence exists about Marcus Chen?"  │
-└─────────────────────────┬───────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│ 1. Convert Query to Vector Embedding                        │
-│    "Marcus Chen evidence" → [0.23, -0.45, 0.87, ...]       │
-└─────────────────────────┬───────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│ 2. Search Vector Database (Similarity Search)               │
-│    Find document chunks with similar vectors                │
-│    (Cosine similarity scores 0.0 - 1.0)                    │
-└─────────────────────────┬───────────────────────────────────┘
-                          ↓
-┌─────────────────────────────────────────────────────────────┐
-│ 3. Retrieve Top 5 Most Relevant Chunks                      │
-│    ✓ MARCUS_TERMINATION_LETTER.txt (score: 0.92)          │
-│    ✓ SECURITY_LOG.txt - Marcus entries (score: 0.88)      │
-│    ✓ BANK_RECORDS.txt - Marcus account (score: 0.85)      │
-│    ✓ MARCUS_EXIT_LOG.txt (score: 0.83)                    │
-│    ✓ PHONE_RECORDS.txt - Marcus calls (score: 0.79)       │
-└─────────────────────────┬───────────────────────────────────┘
-                          ↓
-                   Return to Agent
-```
+
+If Mermaid doesn't render in your viewer, see the plain-text version in [ASCII Fallbacks](#ascii-fallbacks).
 
 > ⚡ **Speed:** Vector search is incredibly fast—searches millions of documents!
 
 #### **Phase 3: Context-Enhanced Response**
 
+```mermaid
+flowchart TD
+    A["Retrieved Document Chunks (with text)<br/>────────────────────────────────────────<br/>Chunk 1: \"Marcus Chen was terminated on...\"<br/>Chunk 2: \"Security logs show Marcus accessed...\"<br/>Chunk 3: \"Bank records indicate deposits of...\""]
+    B["Pass as Context to LLM"]
+    C["LLM Prompt:<br/>\"Based ONLY on these documents, answer:<br/>What evidence exists about Marcus Chen?<br/><br/>Documents:<br/>[chunks inserted here]\""]
+    D["LLM generates answer grounded in facts:<br/><br/>\"According to MARCUS_TERMINATION_LETTER.txt,<br/>Marcus was fired on 2024-01-15 for<br/>'unauthorized access.' SECURITY_LOG.txt shows<br/>he entered secured areas 3 times after hours...\""]
+    E["Agent receives factual response"]
+
+    A --> B --> C --> D --> E
 ```
-┌─────────────────────────────────────────────────┐
-│ Retrieved Document Chunks (with text)           │
-│ ────────────────────────────────────────        │
-│ Chunk 1: "Marcus Chen was terminated on..."    │
-│ Chunk 2: "Security logs show Marcus accessed..."│
-│ Chunk 3: "Bank records indicate deposits of..." │
-└──────────────────┬──────────────────────────────┘
-                   ↓
-       Pass as Context to LLM
-                   ↓
-┌─────────────────────────────────────────────────┐
-│ LLM Prompt:                                     │
-│ "Based ONLY on these documents, answer:         │
-│  What evidence exists about Marcus Chen?        │
-│                                                  │
-│ Documents:                                      │
-│ [chunks inserted here]"                         │
-└──────────────────┬──────────────────────────────┘
-                   ↓
-┌─────────────────────────────────────────────────┐
-│ LLM generates answer grounded in facts:         │
-│                                                  │
-│ "According to MARCUS_TERMINATION_LETTER.txt,    │
-│  Marcus was fired on 2024-01-15 for             │
-│  'unauthorized access.' SECURITY_LOG.txt shows  │
-│  he entered secured areas 3 times after hours..." │
-└──────────────────┬──────────────────────────────┘
-                   ↓
-           Agent receives factual response
-```
+
+If Mermaid doesn't render in your viewer, see the plain-text version in [ASCII Fallbacks](#ascii-fallbacks).
 
 > 🎯 **Key Insight:** The LLM can **only** use information from the retrieved chunks. It can't make things up which is called hallucination!
 
@@ -541,6 +507,74 @@ In the following exercises, you will:
 **Issue**: `ModuleNotFoundError: No module named 'gen_ai_hub'`
 
 - **Solution**: Ensure you've installed the SAP Cloud SDK for AI with `pip install sap-ai-sdk-gen`
+
+---
+
+## ASCII Fallbacks
+
+### Phase 2: Query Processing (ASCII)
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ Agent Question: "What evidence exists about Marcus Chen?"  │
+└─────────────────────────┬───────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────────────────────────┐
+│ 1. Convert Query to Vector Embedding                        │
+│    "Marcus Chen evidence" → [0.23, -0.45, 0.87, ...]       │
+└─────────────────────────┬───────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────────────────────────┐
+│ 2. Search Vector Database (Similarity Search)               │
+│    Find document chunks with similar vectors                │
+│    (Cosine similarity scores 0.0 - 1.0)                    │
+└─────────────────────────┬───────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────────────────────────┐
+│ 3. Retrieve Top 5 Most Relevant Chunks                      │
+│    ✓ MARCUS_TERMINATION_LETTER.txt (score: 0.92)          │
+│    ✓ SECURITY_LOG.txt - Marcus entries (score: 0.88)      │
+│    ✓ BANK_RECORDS.txt - Marcus account (score: 0.85)      │
+│    ✓ MARCUS_EXIT_LOG.txt (score: 0.83)                    │
+│    ✓ PHONE_RECORDS.txt - Marcus calls (score: 0.79)       │
+└─────────────────────────┬───────────────────────────────────┘
+              ↓
+           Return to Agent
+```
+
+### Phase 3: Context-Enhanced Response (ASCII)
+
+```text
+┌─────────────────────────────────────────────────┐
+│ Retrieved Document Chunks (with text)           │
+│ ────────────────────────────────────────        │
+│ Chunk 1: "Marcus Chen was terminated on..."    │
+│ Chunk 2: "Security logs show Marcus accessed..."│
+│ Chunk 3: "Bank records indicate deposits of..." │
+└──────────────────┬──────────────────────────────┘
+           ↓
+       Pass as Context to LLM
+           ↓
+┌─────────────────────────────────────────────────┐
+│ LLM Prompt:                                     │
+│ "Based ONLY on these documents, answer:         │
+│  What evidence exists about Marcus Chen?        │
+│                                                  │
+│ Documents:                                      │
+│ [chunks inserted here]"                         │
+└──────────────────┬──────────────────────────────┘
+           ↓
+┌─────────────────────────────────────────────────┐
+│ LLM generates answer grounded in facts:         │
+│                                                  │
+│ "According to MARCUS_TERMINATION_LETTER.txt,    │
+│  Marcus was fired on 2024-01-15 for             │
+│  'unauthorized access.' SECURITY_LOG.txt shows  │
+│  he entered secured areas 3 times after hours..." │
+└──────────────────┬──────────────────────────────┘
+           ↓
+       Agent receives factual response
+```
 
 ---
 
