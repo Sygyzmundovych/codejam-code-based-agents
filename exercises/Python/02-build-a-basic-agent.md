@@ -109,10 +109,40 @@ if __name__ == "__main__":
 
 👉 Execute the crew with the basic agent:
 
-> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents-1`) when running this command. If you're already in the `starter-project` folder, use `python basic_agent.py` instead.
+> ☝️ Make sure you're in the repository root directory (e.g., `codejam-code-based-agents-1`) when running this command. If you're already in the `starter-project` folder, use the appropriate command for your OS.
+
+**From repository root:**
 
 ```bash
-python project/Python/starter-project/basic_agent.py
+# macOS / Linux / BAS
+python3 ./basic_agent.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\basic_agent.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\basic_agent.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 basic_agent.py
+```
+
+```powershell
+# Windows (PowerShell)
+python basic_agent.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python basic_agent.py
 ```
 
 You should see:
@@ -136,7 +166,7 @@ You created and ran a working AI agent that:
 
 The basic workflow is:
 
-```
+```text
 Task → Agent (Role/Goal/Backstory) → LLM Processing (GPT-4o) → Response → Output
 ```
 
@@ -167,7 +197,25 @@ In the following exercises, you will:
 
 **Issue**: `ModuleNotFoundError: No module named 'crewai'`
 
-- **Solution**: Ensure you're in the correct Python environment: `source venv/bin/activate` and run `pip install crewai litellm`
+- **Solution**: Ensure you're in the correct Python environment and run the install command.
+
+```bash
+# macOS / Linux - Activate environment and install
+source ~/projects/codejam-code-based-agents/env/bin/activate
+pip install crewai litellm
+```
+
+```powershell
+# Windows (PowerShell) - Activate environment and install
+.\env\Scripts\Activate.ps1
+pip install crewai litellm
+```
+
+```cmd
+# Windows (Command Prompt) - Activate environment and install
+.\env\Scripts\activate.bat
+pip install crewai litellm
+```
 
 ---
 
