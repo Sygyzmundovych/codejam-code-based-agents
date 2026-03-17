@@ -58,7 +58,7 @@ appraise_loss_task:
 
 Now that we've moved the agent and task definitions to YAML files, we'll be moving all the remaining code to a new file structure.
 
-> 💡 **What's happening?** In the next steps, you'll create `investigator_crew.py` which will contain all the code currently in `basic_agent.py` (imports, environment loading, RPT1Client initialization, and the @tool function) plus the new crew structure. Once that's done, `basic_agent.py` will no longer be needed.
+> 💡 **What's happening?** In the next steps, you'll create `investigator_crew.py` which will contain all the code currently in `basic_agent.py` (imports, environment loading, RPTClient initialization, and the @tool function) plus the new crew structure. Once that's done, `basic_agent.py` will no longer be needed.
 
 ### Move Code to investigator_crew.py File
 
@@ -75,7 +75,7 @@ from crewai import Agent, Crew, Task, Process
 from crewai.project import CrewBase, agent, task, crew
 from crewai.tools import tool
 from dotenv import load_dotenv
-from rpt_client import RPT1Client
+from gen_ai_hub.proxy.native.sap.client import RPTClient
 ```
 
 #### Step 2: Load Environment and Create The SAP-RPT-1 Tool
@@ -89,8 +89,8 @@ from dotenv import load_dotenv
 env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
-# Initialize RPT1 client after loading environment variables
-rpt1_client = RPT1Client()
+# Initialize RPT client after loading environment variables
+rpt1_client = RPTClient()
 
 @tool("call_rpt1")
 def call_rpt1(payload: dict) -> str:
@@ -104,8 +104,8 @@ def call_rpt1(payload: dict) -> str:
         JSON string with predicted insurance values and item categories.
     """
     try:
-        response = rpt1_client.post_request(json_payload=payload)
-        if response.status_code == 200:
+        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small"))
+        if response:
             import json
             return json.dumps(response.json(), indent=2)
         else:

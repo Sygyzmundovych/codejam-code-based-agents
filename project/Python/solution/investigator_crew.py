@@ -2,7 +2,7 @@ from crewai import Agent, Crew, Task, Process
 from crewai.project import CrewBase, agent, task, crew
 from crewai.tools import tool
 from dotenv import load_dotenv
-from rpt_client import RPT1Client
+from gen_ai_hub.proxy.native.sap.client import RPTClient
 
 import json  # For converting response data to JSON format
 
@@ -22,7 +22,7 @@ env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Initialize RPT1 client after loading environment variables
-rpt1_client = RPT1Client()
+rpt1_client = RPTClient()
 
 @tool("call_rpt1")
 def call_rpt1(payload: dict) -> str:
@@ -36,14 +36,16 @@ def call_rpt1(payload: dict) -> str:
         JSON string with predicted insurance values and item categories.
     """
     try:
-        response = rpt1_client.post_request(json_payload=payload)
-        if response.status_code == 200:
+        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
+        if response:
             import json
             return json.dumps(response.json(), indent=2)
         else:
             return f"Error {response.status_code}: {response.text}"
     except Exception as e:
         return f"Error calling RPT-1: {str(e)}"
+
+
 
 @tool("call_grounding_service")
 def call_grounding_service(user_question: str) -> str:

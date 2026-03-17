@@ -357,17 +357,9 @@ Example:
 dataRepositories=["0d3b132a-cbe1-4c75-abe7-adfbbab7e002"],  # Add the actual ID
 ```
 
-### Step 3: Install and Import Required Libraries
+### Step 3: Import Required Libraries
 
-The grounding service requires the SAP Generative AI Hub SDK for document retrieval.
-
-👉 Open your terminal in the virtual environment and install the SAP AI SDK:
-
-```bash
-pip install sap-ai-sdk-gen
-```
-
-> 💡 This installs the [Cloud SDK for AI (Python)](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/_reference/README_sphynx.html), which provides tools for document grounding, embeddings, and retrieval.
+The grounding service requires the SAP Generative AI Hub SDK for document retrieval. Since we already installed sap-ai-sdk-gen, you can just import the grounding modules.
 
 👉 Add these imports at the **top** of `investigator_crew.py` (after the existing imports):
 
