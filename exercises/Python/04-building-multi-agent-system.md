@@ -218,7 +218,7 @@ if __name__ == "__main__":
 
 ### Step 1: Adding a New Agent
 
-We also have a lot of evidence in our evidence database. You can check the documents that are part of the evidence [here](exercises/data/documents).
+We also have a lot of evidence in our evidence database. You can check the documents that are part of the evidence [here](/exercises/data/documents).
 
 To analyze the evidence and find all the information on our three suspects:
 
@@ -294,8 +294,38 @@ analyze_evidence_task:
 
 👉 Run your crew to test it.
 
+**From repository root:**
+
 ```bash
-python project/Python/starter-project/main.py
+# macOS / Linux
+python3 ./main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python .\main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python .\main.py
+```
+
+**From starter-project folder:**
+
+```bash
+# macOS / Linux
+python3 main.py
+```
+
+```powershell
+# Windows (PowerShell)
+python main.py
+```
+
+```cmd
+# Windows (Command Prompt)
+python main.py
 ```
 
 > 💡 **Note:** The Evidence Analyst currently uses `call_rpt1` as a placeholder tool to make the code functional. This isn't the right tool for evidence analysis. You'll replace it with the `call_grounding_service` tool in Exercise 05 to give the agent proper access to evidence documents.
