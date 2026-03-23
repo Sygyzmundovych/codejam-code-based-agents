@@ -1,4 +1,4 @@
-# Setup SAP Business Application Studio and your personald development space
+# Setup SAP Business Application Studio and your personal development space
 
 > [SAP Business Application Studio](https://help.sap.com/docs/bas/sap-business-application-studio/what-is-sap-business-application-studio) is based on Code-OSS, an open-source project used for building Visual Studio Code. Available as a cloud service, SAP Business Application Studio (BAS) provides a desktop-like experience similar to leading IDEs, with command line and optimized editors.
 
@@ -50,21 +50,9 @@ https://github.com/SAP-samples/codejam-code-based-agents.git
 
 ## Configure the connection details to Generative AI Hub
 
-👉 Go back to the Subaccount in the [BTP cockpit](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
+👉 Create a new file `.env` in the [/project/Python/starter-project/.env](/project/Python/starter-project/.env) directory (click on the link to create the file).
 
-👉 Navigate to `Instances and Subscriptions` and open the SAP AI Core instance's service binding.
-
-![Service Binding in the BTP Cockpit](/exercises/data/images/service-binding.png)
-
-👉 Click **Copy JSON**.
-
-👉 Return to BAS and create a new file `.env` in the [/project/Python/starter-project/.env](/project/Python/starter-project/.env) directory.
-
-👉 Update the variables using the service key into `/project/Python/starter-project/.env`, which should look similar to the following.
-
-👉 Make sure you also assign the correct `AICORE_RESOURCE_GROUP`, we will use `ai-agents-codejam` for this CodeJam.
-
-> ☝️ You will update the `RPT-1_DEPLOYMENT_URL` in a later exercise.
+👉 Add the following variables to your `.env` file:
 
 ```Python
 LITELLM_PROVIDER="sap"
@@ -75,6 +63,18 @@ AICORE_RESOURCE_GROUP="ai-agents-codejam"
 AICORE_BASE_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com"
 RPT1_DEPLOYMENT_URL="https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2/inference/deployments/###/predict"
 ```
+👉 You will need to UPDATE these variables but keep the given structure. The correct information you can find in the SAP AI Core service-key in your BTP cockpit.
+
+👉 Go back to the Subaccount in the [BTP cockpit](https://emea.cockpit.btp.cloud.sap/cockpit#/globalaccount/275320f9-4c26-4622-8728-b6f5196075f5/subaccount/a5a420d8-58c6-4820-ab11-90c7145da589/subaccountoverview).
+
+👉 Navigate to `Instances and Subscriptions` and open the SAP AI Core instance's service binding.
+
+![Service Binding in the BTP Cockpit](/exercises/data/images/service-binding.png)
+
+👉 Make sure the correct resource group `AICORE_RESOURCE_GROUP` is assigned, we will use `ai-agents-codejam` for this CodeJam.
+
+> ☝️ You will update the `RPT-1_DEPLOYMENT_URL` in a later exercise.
+
 
 ## Create a Python virtual environment and install the LiteLLM and CrewAI
 

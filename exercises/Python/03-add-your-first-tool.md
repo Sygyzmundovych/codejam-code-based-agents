@@ -346,7 +346,7 @@ pip install sap-ai-sdk-gen
 
 To add a custom tool to an agent, you create a function that encapsulates the functionality you want to expose. This function will be available for the agent to call when completing its task.
 
-👉 Import the SAP-RPT-1 client (RPTCLient) from SAP Cloud SDK for AI at the top of your `basic_agent.py` file:
+👉 Import the SAP-RPT-1 client (RPTClient) from SAP Cloud SDK for AI at the top of your `basic_agent.py` file:
 
 ```python
 from gen_ai_hub.proxy.native.sap.client import RPTClient
@@ -368,7 +368,7 @@ rpt1_client = RPTClient()
 ```python
 def call_rpt1(payload: dict) -> str:
     """Function to call RPT-1 model via RPT1Client"""
-    response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small")
+    response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
     if response:
         return response.json()
     else:
@@ -404,7 +404,7 @@ def call_rpt1(payload: dict) -> str:
         JSON string with predicted insurance values and item categories.
     """
     try:
-        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small")
+        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
         if response:
             import json
             return json.dumps(response.json(), indent=2)
@@ -458,7 +458,7 @@ rpt1_client = RPTClient()
 @tool("call_rpt1")
 def call_rpt1(payload: dict) -> str:
     """Function to call RPT-1 model via RPT1Client"""
-    response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small")
+    response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
     if response:
         return response.json()
     else:

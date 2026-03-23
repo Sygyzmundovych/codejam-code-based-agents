@@ -1,6 +1,6 @@
 # Build your first AI Agent
 
-For this CodeJam, you will build three agents. Each of these agents will take an active part in solving a burglary and executing a loss appraisal for an insurance claim.
+For this CodeJam, you will build three agents (Stolen Goods Loss Appraiser, Criminal Evidence Analyst, Lead Detective). Each of these agents will take an active part in solving a burglary and executing a loss appraisal for an insurance claim.
 
 After any good burglary you need a loss appraiser who determines the insurance claims. That will be the first agent you are going to build.
 
