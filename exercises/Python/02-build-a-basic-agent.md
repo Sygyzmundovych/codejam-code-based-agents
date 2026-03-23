@@ -8,11 +8,13 @@ After any good burglary you need a loss appraiser who determines the insurance c
 
 ## Overview
 
-In this exercise, you will build an agent with Python, LiteLLM and CrewAI.
+In this exercise, you will build an agent with Python, LiteLLM, SAP Cloud SDK for AI and CrewAI.
 
 [**LiteLLM**](https://docs.litellm.ai/docs/) is a library that provides a unified, provider-agnostic API for calling large language models (LLMs) and handling common tasks (completion, chat, streaming, multimodal inputs). It standardizes request/response handling and includes utilities that speed up integration with agent frameworks and tooling. Essentially it is a gateway between LLM providers and AI Agent frameworks.
 
 That means you can use your Generative AI Hub credentials to build state of the art AI Agents with any of the models available through GenAI Hub and any of the AI Agent frameworks compatible with LiteLLM. This combination is extremely powerful because that means you can use LLMs hosted, managed by SAP (Mistral, Llama, Nvidia), and models from our partners such as Azure OpenAI, Amazon Bedrock (including Anthropic) and Gemini.
+
+[**SAP Cloud SDK for AI**](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/index.html) is SAP's official Python SDK for interacting with SAP AI Core and the Generative AI Hub. It provides convenient clients and utilities for tasks such as document grounding, embeddings, retrieval and model predictions — including SAP's own RPT-1 model. In later exercises you will use the SDK to integrate SAP-RPT-1 and the Grounding Service into your agents, giving them the ability to retrieve and reason over data.
 
 [**CrewAI**](https://crewai.com/) is a third-party open-source Python library. As the name suggests you can use it to build a crew of agents that have a set of tools available to accomplish certain tasks. CrewAI uses tasks to bridge the gap between high-level goals and concrete agent actions, assigning specific objectives and expected outputs. You will use CrewAI as the AI Agent framework for your agents going forward. For now your agent will only be able to respond to incoming queries.
 
@@ -177,6 +179,7 @@ Task → Agent (Role/Goal/Backstory) → LLM Processing (GPT-4o) → Response �
 - **AI Agents** are autonomous systems that perceive, reason, and act
 - **CrewAI** provides a structured framework with agents, tasks, and crews
 - **LiteLLM** acts as a gateway between agent frameworks and LLM providers
+- **SAP Cloud SDK for AI** provides Python clients for SAP AI Core services like document grounding and RPT-1
 - **Generative AI Hub on SAP AI Core** acts as a provider and powers agents with LLMs
 
 ---
@@ -225,5 +228,6 @@ pip install crewai litellm
 - [CrewAI Documentation](https://docs.crewai.com/)
 - [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
 - [LiteLLM Documentation](https://docs.litellm.ai/)
+- [SAP Cloud SDK for AI Documentation](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/index.html)
 
 [Next exercise](03-add-your-first-tool.md)

@@ -65,12 +65,12 @@ payload = {
             "target_columns": [
                 {
                     "name": "INSURANCE_VALUE",
-                    "prediction_placeholder": "'[PREDICT]'",
+                    "prediction_placeholder": "[PREDICT]",
                     "task_type": "regression",
                 },
                 {
                     "name": "ITEM_CATEGORY",
-                    "prediction_placeholder": "'[PREDICT]'",
+                    "prediction_placeholder": "[PREDICT]",
                     "task_type": "classification",
                 },
             ]
@@ -106,7 +106,7 @@ payload = {
                 "ITEM_NAME": "Irises",
                 "ARTIST": "Vincent van Gogh",
                 "ACQUISITION_DATE": "2001-11-08",
-                "INSURANCE_VALUE": "'[PREDICT]'",
+                "INSURANCE_VALUE": "[PREDICT]",
                 "ITEM_CATEGORY": "Painting",
                 "DIMENSIONS": "71x93cm",
                 "CONDITION_SCORE": 7,
@@ -154,7 +154,7 @@ payload = {
                 "ITEM_NAME": "Girl with a Pearl Earring",
                 "ARTIST": "Johannes Vermeer",
                 "ACQUISITION_DATE": "2003-07-11",
-                "INSURANCE_VALUE": "'[PREDICT]'",
+                "INSURANCE_VALUE": "[PREDICT]",
                 "ITEM_CATEGORY": "Painting",
                 "DIMENSIONS": "44x39cm",
                 "CONDITION_SCORE": 8,
@@ -179,7 +179,7 @@ payload = {
                 "ARTIST": "Salvador Dalí",
                 "ACQUISITION_DATE": "2005-03-10",
                 "INSURANCE_VALUE": 35000000,
-                "ITEM_CATEGORY": "'[PREDICT]'",
+                "ITEM_CATEGORY": "[PREDICT]",
                 "DIMENSIONS": "24x33cm",
                 "CONDITION_SCORE": 9,
                 "RARITY_SCORE": 9,
@@ -214,7 +214,7 @@ payload = {
                 "ITEM_NAME": "The Thinker",
                 "ARTIST": "Auguste Rodin",
                 "ACQUISITION_DATE": "2000-11-05",
-                "INSURANCE_VALUE": "'[PREDICT]'",
+                "INSURANCE_VALUE": "[PREDICT]",
                 "ITEM_CATEGORY": "Sculpture",
                 "DIMENSIONS": "Height: 1.9m",
                 "CONDITION_SCORE": 9,
@@ -328,77 +328,31 @@ python basic_agent.py
 ☝️ You added an input variable to your agent but the agent is still not using a tool. Let's build the actual tool next.
 
 ---
-
 ## Add SAP-RPT-1 to Your Agent
 
-### Step 0: Build the SAP-RPT-1 Client
+SAP-RPT-1 can be easily accessed via SAP Cloud SDK for AI. For further information, refer to the [SAP Cloud SDK for AI Documentation](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/_reference/gen_ai_hub.html#sap-rpt-1-models)
 
-SAP-RPT-1 will be added to the SAP Cloud SDK for AI but for now we will build our own client.
+### Step 0: Install and Import Required SAP Cloud SDK for AI Libraries
 
-👉 Create a new file [`/project/Python/starter-project/rpt_client.py`](/project/Python/starter-project/rpt_client.py)
+👉 Open your terminal in the virtual environment and install the SAP AI SDK:
 
-👉 Add the code below:
-
-```python
-import os
-import requests
-
-class RPT1Client:
-    def __init__(self):
-        # Read env vars (assume dotenv already loaded in main)
-        self.client_id = os.getenv("AICORE_CLIENT_ID")
-        self.client_secret = os.getenv("AICORE_CLIENT_SECRET")
-        self.auth_url = os.getenv("AICORE_AUTH_URL")
-        self.deployment_url = os.getenv("RPT1_DEPLOYMENT_URL")
-        self.token = self._fetch_token()
-        self.resource_group = os.getenv("AICORE_RESOURCE_GROUP", "default")
-
-    # Function to fetch OAuth token
-    def _fetch_token(self, timeout: int = 30) -> str:
-        if not self.auth_url:
-            raise ValueError("AICORE_AUTH_URL must be provided (env or arg).")
-        if not self.client_id:
-            raise ValueError("AICORE_CLIENT_ID must be provided (env or arg).")
-        if not self.client_secret:
-            raise ValueError("AICORE_CLIENT_SECRET must be provided (env or arg).")
-        data = {
-            "grant_type": "client_credentials",
-            "client_id": self.client_id,
-            "client_secret": self.client_secret
-        }
-        headers = {"Content-Type": "application/x-www-form-urlencoded"}
-        resp = requests.post(self.auth_url, data=data, headers=headers, timeout=timeout)
-        resp.raise_for_status()
-        token = resp.json()
-        access_token = token["access_token"]
-        return access_token
-
-    def post_request(self, json_payload: dict, timeout: int = 60):
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-            "Content-Type": "application/json",
-            "AI-Resource-Group": self.resource_group
-        }
-
-        # Send the POST request to the deployment URL
-        response = requests.post(
-            self.deployment_url, json=json_payload, headers=headers
-        )
-        return response
-
+```bash
+pip install sap-ai-sdk-gen
 ```
+
+> 💡 This installs the [Cloud SDK for AI (Python)](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/_reference/README_sphynx.html), which provides tools for document grounding, embeddings, retrieval, as well as rpt-1 predictions.
 
 ### Step 1: Build the Function for the Tool
 
 To add a custom tool to an agent, you create a function that encapsulates the functionality you want to expose. This function will be available for the agent to call when completing its task.
 
-👉 Import the SAP-RPT-1 client at the top of your `basic_agent.py` file:
+👉 Import the SAP-RPT-1 client (RPTCLient) from SAP Cloud SDK for AI at the top of your `basic_agent.py` file:
 
 ```python
-from rpt_client import RPT1Client
+from gen_ai_hub.proxy.native.sap.client import RPTClient
 ```
 
-> ⚠️ **Important**: Make sure you initialize the `RPT1Client()` **after** loading the `.env` file with `load_dotenv()`, otherwise the environment variables won't be available. Your initialization should look like this:
+👉 Initialize the RPTClient after the initialization of the environment variables
 
 ```python
 # Load .env from the same directory as this script
@@ -406,7 +360,7 @@ env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Initialize RPT1 client after loading environment variables
-rpt1_client = RPT1Client()
+rpt1_client = RPTClient()
 ```
 
 👉 Add this code above your agent definition:
@@ -414,8 +368,8 @@ rpt1_client = RPT1Client()
 ```python
 def call_rpt1(payload: dict) -> str:
     """Function to call RPT-1 model via RPT1Client"""
-    response = rpt1_client.post_request(json_payload=payload)
-    if response.status_code == 200:
+    response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small")
+    if response:
         return response.json()
     else:
         return f"Error: {response.status_code} - {response.text}"
@@ -423,7 +377,7 @@ def call_rpt1(payload: dict) -> str:
 
 ### Step 2: Make the Function a Tool
 
-👉 Add the following line of codeto your import section at the top of your `basic_agent.py` file:
+👉 Add the following line of code to your import section at the top of your `basic_agent.py` file:
 
 ```python
 from crewai.tools import tool
@@ -450,8 +404,8 @@ def call_rpt1(payload: dict) -> str:
         JSON string with predicted insurance values and item categories.
     """
     try:
-        response = rpt1_client.post_request(json_payload=payload)
-        if response.status_code == 200:
+        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small")
+        if response:
             import json
             return json.dumps(response.json(), indent=2)
         else:
@@ -490,21 +444,22 @@ from pathlib import Path
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew
 from crewai.tools import tool
-from rpt_client import RPT1Client
+from gen_ai_hub.proxy.native.sap.client import RPTClient
 from payload import payload
+
 
 # Load .env from the same directory as this script
 env_path = Path(__file__).parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Initialize RPT1 client after loading environment variables
-rpt1_client = RPT1Client()
+rpt1_client = RPTClient()
 
 @tool("call_rpt1")
 def call_rpt1(payload: dict) -> str:
     """Function to call RPT-1 model via RPT1Client"""
-    response = rpt1_client.post_request(json_payload=payload)
-    if response.status_code == 200:
+    response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small")
+    if response:
         return response.json()
     else:
         return f"Error: {response.status_code} - {response.text}"
@@ -646,7 +601,7 @@ Tools are essential for agents to:
 - **Decorators** like `@tool()` transform functions into CrewAI-compatible tools with descriptions
 - **Tool Assignment** is crucial—agents only have access to tools explicitly passed in the `tools` parameter
 - **Tool Availability** should be reflected in the agent's goal and task descriptions so the LLM knows they exist
-- **Custom Clients** like `RPT1Client` encapsulate API interactions, keeping tool functions clean and focused
+- **Custom Clients** like `RPTClient` encapsulate API interactions, keeping tool functions clean and focused
 
 ---
 
@@ -675,10 +630,6 @@ In the following exercises, you will:
   - The tool is assigned to the agent via `tools=[call_rpt1]`
   - Your task description mentions the tool so the LLM knows to use it
 
-**Issue**: `ModuleNotFoundError: No module named 'rpt_client'`
-
-- **Solution**: Ensure you've created the `rpt_client.py` file in `/project/Python/starter-project/` and that you're in the correct directory when running the script.
-
 **Issue**: Authentication error calling RPT-1
 
 - **Solution**: Verify your `.env` file contains valid credentials:
@@ -702,5 +653,6 @@ In the following exercises, you will:
 - [CrewAI Documentation](https://docs.crewai.com/)
 - [SAP Generative AI Hub](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/generative-ai-hub-in-sap-ai-core-7db524ee75e74bf8b50c167951fe34a5)
 - [LiteLLM Documentation](https://docs.litellm.ai/)
+- [SAP Cloud SDK for AI Documentation](https://help.sap.com/doc/generative-ai-hub-sdk/CLOUD/en-US/index.html)
 
 [Next exercise](04-building-multi-agent-system.md)
