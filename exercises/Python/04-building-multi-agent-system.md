@@ -104,7 +104,7 @@ def call_rpt1(payload: dict) -> str:
         JSON string with predicted insurance values and item categories.
     """
     try:
-        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-small"))
+        response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
         if response:
             import json
             return json.dumps(response.json(), indent=2)
@@ -120,6 +120,8 @@ def call_rpt1(payload: dict) -> str:
 > 💡 **Why?** All functionality from `basic_agent.py` has been moved to `investigator_crew.py`. Keeping the old file would cause confusion and potential import conflicts.
 
 #### Step 3: Build The Crew Itself
+
+👉 In [`/project/Python/starter-project/investigator_crew.py`](/project/Python/starter-project/investigator_crew.py) add this code below the tool.
 
 ```python
 @CrewBase

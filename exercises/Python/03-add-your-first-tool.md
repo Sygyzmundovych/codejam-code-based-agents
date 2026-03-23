@@ -367,7 +367,15 @@ rpt1_client = RPTClient()
 
 ```python
 def call_rpt1(payload: dict) -> str:
-    """Function to call RPT-1 model via RPT1Client"""
+    """Call RPT-1 model to predict missing values in the payload.
+
+    Args:
+        payload: A dictionary containing the stolen items data with prediction placeholders.
+                 This should be the exact payload provided in the task inputs.
+
+    Returns:
+        JSON string with predicted insurance values and item categories.
+    """
     response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
     if response:
         return response.json()
@@ -457,7 +465,15 @@ rpt1_client = RPTClient()
 
 @tool("call_rpt1")
 def call_rpt1(payload: dict) -> str:
-    """Function to call RPT-1 model via RPT1Client"""
+    """Call RPT-1 model to predict missing values in the payload.
+
+    Args:
+        payload: A dictionary containing the stolen items data with prediction placeholders.
+                 This should be the exact payload provided in the task inputs.
+
+    Returns:
+        JSON string with predicted insurance values and item categories.
+    """
     response = rpt1_client.predict(body=payload, model_name="sap-rpt-1-large")
     if response:
         return response.json()
