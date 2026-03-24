@@ -17,7 +17,7 @@ The truth is buried in a mountain of security logs, financial records, and phone
 Now that you understand the use case, go ahead and start the first exercise:
 
 - [Exercise 00 - Understanding Generative AI Hub in SAP AI Core](./Python/00-understanding-genAI-hub.md)
-- [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./exercises/Python/01-setup-dev-space.md)
+- [Exercise 01 - Setup SAP Business Application Studio and your personald development space](./Python/01-setup-dev-space.md)
 - [Exercise 02 - Build your first AI Agent](./Python/02-build-a-basic-agent.md)
 - [Exercise 03 - Build your first agent tool](./Python/03-add-your-first-tool.md)
 - [Exercise 04 - Building a multi-agent system](./Python/04-building-multi-agent-system.md)
