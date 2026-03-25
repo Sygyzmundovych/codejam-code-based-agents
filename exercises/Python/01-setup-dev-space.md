@@ -145,7 +145,7 @@ source ~/projects/codejam-code-based-agents/env/bin/activate
 👉 Install LiteLLM, CrewAI, and python-dotenv using the following `pip install` commands.
 
 ```bash
-pip install litellm crewai python-dotenv
+pip install litellm==1.82.6 crewai python-dotenv
 ```
 
 > In case you see a message in BAS asking you to create an isolated environment, click on `Don't show again`.
