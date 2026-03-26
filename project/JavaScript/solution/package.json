@@ -1,0 +1,37 @@
+{
+  "name": "investigator-crew-typescript",
+  "version": "1.0.0",
+  "description": "Multi-agent investigation system using LangGraph and SAP Cloud SDK for AI",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "tsx src/main.ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "langgraph",
+    "sap-cloud-sdk",
+    "ai",
+    "multi-agent"
+  ],
+  "author": "Kevin Riedelsheimer",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/langgraph": "^0.2.0",
+    "@sap-ai-sdk/orchestration": "^1.0.0",
+    "@sap-ai-sdk/ai-api": "^1.0.0",
+    "@sap-ai-sdk/foundation-models": "^1.0.0",
+    "@sap-ai-sdk/rpt": "latest",
+    "axios": "^1.7.0",
+    "dotenv": "^16.4.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
