@@ -400,6 +400,42 @@ When you call `workflow.kickoff(inputs)`:
 
 > 💡 **LangGraph's approach gives you more explicit control.** Every transition between agents is an edge you define. There's no magic collection of agents via decorators; the graph structure is transparent and debuggable.
 
+### Why This Architecture Matters
+
+**Benefits of Multi-Agent Systems:**
+
+- **Specialization** — Each agent is an expert in one domain (valuation vs. investigation)
+  - Different LLMs can be assigned per node (GPT-4o for the appraiser, Claude for the analyst)
+  - Each agent has only the tools it needs (principle of least privilege)
+
+- **Scalability** — Adding new agents is straightforward
+  - Add a new node method, register it with `.addNode()`, and connect it with `.addEdge()`
+  - No need to modify existing agents
+
+- **Collaboration** — Agents can build upon each other's work
+  - Sequential processing allows later nodes to use earlier results via shared state
+  - The `context` pattern (used in Exercise 06) enables explicit data sharing
+
+- **Maintainability** — Clear separation of concerns
+  - Agent "personality" (goals, roles) lives in `agentConfigs.ts`
+  - Tool integration lives in `tools.ts`
+  - Orchestration logic lives in `investigationWorkflow.ts`
+
+**Real-World Applications:**
+
+- Customer service: Routing agent → Specialist agents → Escalation agent
+- Research: Data collection agent → Analysis agent → Report generation agent
+- DevOps: Monitoring agent → Diagnosis agent → Remediation agent
+
+### The Role of Tools
+
+Notice each agent uses different tools:
+
+- **Appraiser Node** uses `callRPT1Tool` — a structured prediction model
+- **Evidence Analyst Node** uses placeholder logic now, but needs `callGroundingService` (Exercise 05)
+
+This demonstrates **tool specialization**: agents only get the tools relevant to their role.
+
 ---
 
 ## Key Takeaways

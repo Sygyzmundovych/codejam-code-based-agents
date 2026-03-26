@@ -458,9 +458,23 @@ You extended your agent with:
 
 ### The Tool Flow
 
+```mermaid
+flowchart LR
+    A[Agent Node] --> B[callRPT1Tool]
+    B --> C[RPT1Client]
+    C --> D[SAP AI Core]
+    D --> E[Prediction Response]
+    E --> F[State Update]
 ```
-Agent Node → callRPT1Tool(payload) → RPT1Client → SAP AI Core → Prediction Response → State Update
-```
+
+### Why This Matters
+
+Tools are essential for agents to:
+
+- **Access External APIs** and services (like the RPT-1 model)
+- **Perform Real Actions** beyond text generation
+- **Provide Grounded Responses** based on actual data and computations
+- **Enable Autonomous Operation** by expanding the agent's capabilities
 
 ### Tools in LangGraph vs CrewAI
 

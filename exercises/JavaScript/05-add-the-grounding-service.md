@@ -56,30 +56,104 @@ The SAP Generative AI Hub **Grounding Service** uses RAG in three phases:
 
 Before your agent can search documents, they must be prepared:
 
-1. **Upload Documents** → Evidence files uploaded to SAP Object Store
-2. **Chunk Documents** → Large documents split into smaller passages
-3. **Create Embeddings** → Each chunk converted to a vector (semantic representation)
-4. **Store in Vector Database** → Embeddings indexed for fast similarity search
+1. **Upload Documents** → Evidence files uploaded to SAP Object Store (S3 bucket)
+2. **Chunk Documents** → Large documents split into smaller chunks (e.g., 500-word passages)
+   - Why? LLMs have context limits; chunks are manageable pieces
+   - Example: "MARCUS_TERMINATION_LETTER.txt" (5 pages) → 3 chunks
+3. **Create Embeddings** → Each chunk converted to a vector (array of ~1,536 numbers)
+   - Why? Computers can't search text semantically; vectors enable "meaning-based" search
+   - Example: "unauthorized access" and "broke into secure area" have similar vectors
+4. **Store in Vector Database** → Embeddings indexed for lightning-fast similarity search
 
 > 💡 **Good news:** This has been done for you! The evidence documents are already processed and stored in a grounding pipeline.
 
 #### Phase 2: Query Processing (What Your Agent Does)
 
+```mermaid
+flowchart TD
+    A["Agent Question:<br/>What evidence exists about Marcus Chen?"]
+    B["1. Convert Query to Vector Embedding<br/>Marcus Chen evidence → [0.23, -0.45, 0.87, ...]"]
+    C["2. Search Vector Database<br/>Cosine similarity scores 0.0 – 1.0"]
+    D["3. Retrieve Top 5 Most Relevant Chunks<br/>✓ MARCUS_TERMINATION_LETTER.txt (0.92)<br/>✓ SECURITY_LOG.txt (0.88)<br/>✓ BANK_RECORDS.txt (0.85)<br/>✓ MARCUS_EXIT_LOG.txt (0.83)<br/>✓ PHONE_RECORDS.txt (0.79)"]
+    E[Return to Agent]
+
+    A --> B --> C --> D --> E
 ```
-Query: "What evidence exists about Marcus Chen?"
-    ↓
-Convert to vector embedding
-    ↓
-Search vector database (cosine similarity)
-    ↓
-Retrieve top 5 most relevant document chunks
-    ↓
-Return to Agent
-```
+
+> ⚡ **Speed:** Vector search is incredibly fast — searches millions of documents in milliseconds!
 
 #### Phase 3: Context-Enhanced Response
 
-The retrieved document chunks are injected into the LLM prompt as context. The LLM can **only** use information from these chunks; it cannot fabricate information outside what was retrieved.
+```mermaid
+flowchart TD
+    A["Retrieved Document Chunks<br/>Chunk 1: Marcus Chen was terminated on...<br/>Chunk 2: Security logs show Marcus accessed...<br/>Chunk 3: Bank records indicate deposits of..."]
+    B["LLM Prompt<br/>Based ONLY on these documents, answer:<br/>What evidence exists about Marcus Chen?<br/>Documents: chunks inserted here"]
+    C["LLM generates answer grounded in facts<br/>According to MARCUS_TERMINATION_LETTER.txt,<br/>Marcus was fired on 2024-01-15 for<br/>unauthorized access. SECURITY_LOG.txt shows<br/>he entered secured areas 3 times after hours..."]
+    D[Agent receives factual response]
+
+    A -->|Pass as Context to LLM| B --> C --> D
+```
+
+> 🎯 **Key Insight:** The LLM can **only** use information from the retrieved chunks; it cannot fabricate information outside what was retrieved.
+
+### The Grounding Pipeline
+
+SAP AI Core uses **pipelines** to orchestrate the entire grounding workflow. Think of a pipeline as a pre-configured "document search engine" for your agents.
+
+**A Pipeline Contains:**
+
+| Component                | Purpose                        | Example                                  |
+| ------------------------ | ------------------------------ | ---------------------------------------- |
+| **Data Repository**      | Where documents are stored     | S3 bucket: `evidence-documents`          |
+| **Embedding Model**      | Converts text to vectors       | `text-embedding-ada-002` (OpenAI)        |
+| **Vector Database**      | Stores and searches embeddings | SAP Vector Engine                        |
+| **Search Configuration** | Search parameters              | `max_chunk_count: 5` (return top 5 chunks) |
+| **Pipeline ID**          | Unique identifier              | `0d3b132a-cbe1-4c75-abe7-adfbbab7e002`   |
+
+**For This Exercise:**
+
+- ✅ A pipeline is **already created** with all 8 evidence documents
+- ✅ Documents are **already embedded** and indexed
+- ✅ All you need to do is **connect your agent** using the Pipeline ID
+
+> 💡 **Why Pre-Configured?** Document processing and embedding creation can take time and cost money. This setup has been done for you so you can focus on building agents!
+
+### Why This Matters for Your Investigation
+
+With the grounding service, your Evidence Analyst transforms from guessing to investigating:
+
+| Capability                       | Impact                                                    |
+| -------------------------------- | --------------------------------------------------------- |
+| ✅ **Search Actual Evidence**    | No more made-up "facts" — only real documents             |
+| ✅ **Find Suspects' Details**    | Alibis, motives, timelines, connections backed by sources |
+| ✅ **Cite Specific Sources**     | "According to BANK_RECORDS.txt..." builds trust           |
+| ✅ **Avoid Hallucination**       | LLM can't invent information — only uses retrieved chunks |
+| ✅ **Make Informed Conclusions** | Decisions based on facts, not patterns from training data |
+| ✅ **Audit Trail**               | Every answer traceable to source documents (compliance!)  |
+
+**Before Grounding:**
+
+- Agent: "I think Marcus might be involved because..."
+- Reliability: ~30% (pure guesswork)
+
+**After Grounding:**
+
+- Agent: "SECURITY_LOG.txt shows Marcus accessed gallery 2C at 23:47 on the night of the theft..."
+- Reliability: ~95% (fact-based, verifiable)
+
+### RAG vs. Fine-Tuning: Why Grounding is Better
+
+You might wonder: "Why not just fine-tune the LLM on our evidence documents?"
+
+| Fine-Tuning                                 | Grounding (RAG)                      |
+| ------------------------------------------- | ------------------------------------ |
+| ❌ Expensive ($1000s per training run)      | ✅ Cost-effective (pay per search)   |
+| ❌ Weeks to retrain when documents update   | ✅ Instant — just add/update documents |
+| ❌ Black box — can't trace answers to sources | ✅ Full transparency with citations  |
+| ❌ Model "memorizes" data (privacy risk)    | ✅ Documents stay separate (secure)  |
+| ❌ Requires ML expertise                    | ✅ Simple API calls                  |
+
+> 🎯 **Best Practice:** Use grounding for knowledge that changes (evidence, documents, data). Use fine-tuning for behaviour/style (e.g., "always be polite").
 
 ### How Grounding Works in the SAP Cloud SDK for AI
 
@@ -98,6 +172,8 @@ No separate retrieval API client is needed; it's all built into `OrchestrationCl
 👉 Open [SAP AI Launchpad](https://genai-codejam-luyq1wkg.ai-launchpad.prod.eu-central-1.aws.ai-prod.cloud.sap/aic/index.html#/workspaces&/a/detail/TwoColumnsMidExpanded/?workspace=api-connection&resourceGroup=s3-grounding)
 
 #### Select the Resource Group
+
+SAP AI Core tenants use [resource groups](https://help.sap.com/docs/sap-ai-core/sap-ai-core-service-guide/resource-groups) to isolate AI resources and workloads. Scenarios and executables are shared across all resource groups within the instance, but deployments and configurations are scoped to a specific resource group.
 
 > DO NOT USE THE DEFAULT `default` RESOURCE GROUP!
 

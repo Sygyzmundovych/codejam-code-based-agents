@@ -80,33 +80,29 @@ When your agent asks a question, here's what happens:
 
 ```mermaid
 flowchart TD
-    A["Agent Question: \"What evidence exists about Marcus Chen?\""]
-    B["1. Convert Query to Vector Embedding<br/>\"Marcus Chen evidence\" → [0.23, -0.45, 0.87, ...]"]
-    C["2. Search Vector Database (Similarity Search)<br/>Find document chunks with similar vectors<br/>(Cosine similarity scores 0.0 - 1.0)"]
-    D["3. Retrieve Top 5 Most Relevant Chunks<br/>✓ MARCUS_TERMINATION_LETTER.txt (score: 0.92)<br/>✓ SECURITY_LOG.txt - Marcus entries (score: 0.88)<br/>✓ BANK_RECORDS.txt - Marcus account (score: 0.85)<br/>✓ MARCUS_EXIT_LOG.txt (score: 0.83)<br/>✓ PHONE_RECORDS.txt - Marcus calls (score: 0.79)"]
-    E["Return to Agent"]
+    A["Agent Question:<br/>What evidence exists about Marcus Chen?"]
+    B["1. Convert Query to Vector Embedding<br/>Marcus Chen evidence → [0.23, -0.45, 0.87, ...]"]
+    C["2. Search Vector Database<br/>Cosine similarity scores 0.0 – 1.0"]
+    D["3. Retrieve Top 5 Most Relevant Chunks<br/>✓ MARCUS_TERMINATION_LETTER.txt (0.92)<br/>✓ SECURITY_LOG.txt (0.88)<br/>✓ BANK_RECORDS.txt (0.85)<br/>✓ MARCUS_EXIT_LOG.txt (0.83)<br/>✓ PHONE_RECORDS.txt (0.79)"]
+    E[Return to Agent]
 
     A --> B --> C --> D --> E
 ```
 
-If Mermaid doesn't render in your viewer, see the plain-text version in [ASCII Fallbacks](#ascii-fallbacks).
-
-> ⚡ **Speed:** Vector search is incredibly fast—searches millions of documents!
+> ⚡ **Speed:** Vector search is incredibly fast — searches millions of documents in milliseconds!
 
 #### **Phase 3: Context-Enhanced Response**
 
 ```mermaid
 flowchart TD
-    A["Retrieved Document Chunks (with text)<br/>────────────────────────────────────────<br/>Chunk 1: \"Marcus Chen was terminated on...\"<br/>Chunk 2: \"Security logs show Marcus accessed...\"<br/>Chunk 3: \"Bank records indicate deposits of...\""]
+    A["Retrieved Document Chunks<br/>Chunk 1: Marcus Chen was terminated on...<br/>Chunk 2: Security logs show Marcus accessed...<br/>Chunk 3: Bank records indicate deposits of..."]
     B["Pass as Context to LLM"]
-    C["LLM Prompt:<br/>\"Based ONLY on these documents, answer:<br/>What evidence exists about Marcus Chen?<br/><br/>Documents:<br/>[chunks inserted here]\""]
-    D["LLM generates answer grounded in facts:<br/><br/>\"According to MARCUS_TERMINATION_LETTER.txt,<br/>Marcus was fired on 2024-01-15 for<br/>'unauthorized access.' SECURITY_LOG.txt shows<br/>he entered secured areas 3 times after hours...\""]
+    C["LLM Prompt:<br/>Based ONLY on these documents, answer:<br/>What evidence exists about Marcus Chen?<br/>Documents: chunks inserted here"]
+    D["LLM generates answer grounded in facts:<br/>According to MARCUS_TERMINATION_LETTER.txt,<br/>Marcus was fired on 2024-01-15 for<br/>unauthorized access. SECURITY_LOG.txt shows<br/>he entered secured areas 3 times after hours..."]
     E["Agent receives factual response"]
 
     A --> B --> C --> D --> E
 ```
-
-If Mermaid doesn't render in your viewer, see the plain-text version in [ASCII Fallbacks](#ascii-fallbacks).
 
 > 🎯 **Key Insight:** The LLM can **only** use information from the retrieved chunks. It can't make things up which is called hallucination!
 
@@ -499,33 +495,6 @@ In the following exercises, you will:
 **Issue**: `ModuleNotFoundError: No module named 'gen_ai_hub'`
 
 - **Solution**: Ensure you've installed the SAP Cloud SDK for AI with `pip install sap-ai-sdk-gen`
-
----
-
-### Phase 2: Query Processing
-
-```mermaid
-flowchart TD
-    A["Agent Question:\n'What evidence exists about Marcus Chen?'"]
-    B["1. Convert Query to Vector Embedding\n'Marcus Chen evidence' → [0.23, -0.45, 0.87, ...]"]
-    C["2. Search Vector Database\nCosine similarity scores 0.0 – 1.0"]
-    D["3. Retrieve Top 5 Most Relevant Chunks\n✓ MARCUS_TERMINATION_LETTER.txt (0.92)\n✓ SECURITY_LOG.txt (0.88)\n✓ BANK_RECORDS.txt (0.85)\n✓ MARCUS_EXIT_LOG.txt (0.83)\n✓ PHONE_RECORDS.txt (0.79)"]
-    E[Return to Agent]
-
-    A --> B --> C --> D --> E
-```
-
-### Phase 3: Context-Enhanced Response
-
-```mermaid
-flowchart TD
-    A["Retrieved Document Chunks\nChunk 1: 'Marcus Chen was terminated on...'\nChunk 2: 'Security logs show Marcus accessed...'\nChunk 3: 'Bank records indicate deposits of...'"]
-    B["LLM Prompt\n'Based ONLY on these documents, answer:\nWhat evidence exists about Marcus Chen?\n\nDocuments: [chunks inserted here]'"]
-    C["LLM generates answer grounded in facts\n'According to MARCUS_TERMINATION_LETTER.txt,\nMarcus was fired on 2024-01-15 for\n\"unauthorized access.\" SECURITY_LOG.txt shows\nhe entered secured areas 3 times after hours...'"]
-    D[Agent receives factual response]
-
-    A -->|Pass as Context to LLM| B --> C --> D
-```
 
 ---
 

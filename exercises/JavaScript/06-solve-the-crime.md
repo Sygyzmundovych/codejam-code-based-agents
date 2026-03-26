@@ -216,6 +216,16 @@ The `AGENT_CONFIGS` object in `agentConfigs.ts` serves the same purpose as CrewA
 - No YAML parsing, no indentation errors, no key synchronization issues
 - Your IDE can trace exactly where a system prompt is used and refactor it
 
+### Why This Matters
+
+Multi-agent systems are powerful because they:
+
+- **Distribute Responsibilities** across specialized agents with distinct roles
+- **Enable Collaboration** through task delegation and information sharing
+- **Improve Reasoning** by combining multiple expert perspectives
+- **Handle Complexity** by breaking down large problems into manageable subtasks
+- **Scale Efficiently** as new agents and tools can be added without disrupting existing ones
+
 ### Why This Architecture Matters
 
 **Benefits of multi-agent LangGraph systems:**
