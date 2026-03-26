@@ -200,16 +200,12 @@ You completed a full multi-agent investigation system where:
 
 ### The Complete Investigation Flow
 
-```
-START
-  ↓
-Appraiser Node (RPT-1 predictions → appraisal_result)
-  ↓
-Evidence Analyst Node (Grounding searches × 3 suspects → evidence_analysis)
-  ↓
-Lead Detective Node (LLM synthesis → final_conclusion)
-  ↓
-END
+```mermaid
+flowchart TD
+    A[START] --> B["Appraiser Node\nRPT-1 predictions → appraisal_result"]
+    B --> C["Evidence Analyst Node\nGrounding searches × 3 suspects → evidence_analysis"]
+    C --> D["Lead Detective Node\nLLM synthesis → final_conclusion"]
+    D --> E[END]
 ```
 
 ### The Role of agentConfigs.ts

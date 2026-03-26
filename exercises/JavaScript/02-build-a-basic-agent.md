@@ -282,8 +282,10 @@ You created a working AI agent that:
 
 The basic workflow is:
 
-```
-START → Appraiser Node (LLM call via OrchestrationClient) → END
+```mermaid
+flowchart LR
+    A[START] --> B["Appraiser Node\nLLM call via OrchestrationClient"]
+    B --> C[END]
 ```
 
 ### Understanding Nodes

@@ -596,8 +596,15 @@ You extended your agent with:
 
 ### The Tool Flow
 
-```text
-Agent Task → LLM Reasoning → Tool Decision → Tool Execution → Result → Agent Processing → LLM Reasoning → Output
+```mermaid
+flowchart LR
+    A[Agent Task] --> B[LLM Reasoning]
+    B --> C[Tool Decision]
+    C --> D[Tool Execution]
+    D --> E[Result]
+    E --> F[Agent Processing]
+    F --> G[LLM Reasoning]
+    G --> H[Output]
 ```
 
 ### Why This Matters

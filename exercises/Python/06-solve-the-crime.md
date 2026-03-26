@@ -244,12 +244,18 @@ You created a complete multi-agent system where:
 
 ### The Investigation Flow
 
-```text
-Lead Detective → Evidence Analysis → Grounding Search → Suspect Investigation
-              ↓
-         Loss Appraisal → RPT-1 Predictions → Value Determination
-              ↓
-         Crime Resolution → Suspect Identification → Final Report
+```mermaid
+flowchart TD
+    A[Lead Detective] --> B[Evidence Analysis]
+    B --> C[Grounding Search]
+    C --> D[Suspect Investigation]
+    A --> E[Loss Appraisal]
+    E --> F[RPT-1 Predictions]
+    F --> G[Value Determination]
+    D --> H[Crime Resolution]
+    G --> H
+    H --> I[Suspect Identification]
+    I --> J[Final Report]
 ```
 
 ### Why This Matters

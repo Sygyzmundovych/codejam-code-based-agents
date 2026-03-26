@@ -168,8 +168,12 @@ You created and ran a working AI agent that:
 
 The basic workflow is:
 
-```text
-Task → Agent (Role/Goal/Backstory) → LLM Processing (GPT-4o) → Response → Output
+```mermaid
+flowchart LR
+    A[Task] --> B[Agent\nRole / Goal / Backstory]
+    B --> C[LLM Processing\nGPT-4o]
+    C --> D[Response]
+    D --> E[Output]
 ```
 
 ---
