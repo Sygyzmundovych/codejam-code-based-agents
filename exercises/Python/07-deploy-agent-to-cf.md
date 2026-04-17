@@ -358,14 +358,17 @@ __pycache__/
 👉 Open a terminal and log in to your SAP BTP CF environment:
 
 ```bash
-cf login -a https://api.cf.eu10-004.hana.ondemand.com --sso --origin a7rg4vxjp.accounts.ondemand.com
+cf login -a https://api.cf.eu10-004.hana.ondemand.com --origin a7rg4vxjp-platform
 ```
+👉 Use the credentials provided in the system access email.
 
-> The `--sso` flag opens a browser tab where you authenticate. The `--origin` flag ensures CF redirects you to the correct custom identity provider for this CodeJam.
+> The `--origin` flag ensures CF redirects you to the correct custom identity provider for this CodeJam.
 
 👉 Select the correct **org** and **space** when prompted.
 
 ### Step 2: Push the App
+
+👉 Navigate to your starter-project folder, type in the terminal: `cd project/Python/starter-project`
 
 👉 From your starter-project folder, run:
 
