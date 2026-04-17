@@ -274,9 +274,11 @@ Cloud Foundry uses a `manifest.yml` file to know how to run your application. Th
 
 👉 Create a new file [`/project/Python/starter-project/manifest.yml`](/project/Python/starter-project/manifest.yml) at the root of your starter project.
 
+👉 Add YOUR NAME to the end of the application name as shown below!
+
 ```yaml
 applications:
-  - name: investigator-crew-a2a
+  - name: investigator-crew-<YOUR NAME>
     memory: 1024M
     disk_quota: 2048M
     instances: 1
@@ -393,9 +395,9 @@ CF will:
 Once the push succeeds, CF prints the app URL:
 
 ```
-name:              investigator-crew-a2a
+name:              investigator-crew-<YOUR NAME>
 requested state:   started
-routes:            investigator-crew-a2a-<to be determined>.cfapps.eu10-004.hana.ondemand.com
+routes:            investigator-crew-<YOUR NAME>-<to be determined>.cfapps.eu10-004.hana.ondemand.com
 ```
 
 👉 Copy the route URL.
@@ -406,7 +408,7 @@ routes:            investigator-crew-a2a-<to be determined>.cfapps.eu10-004.hana
 
 ```yaml
 env:
-  APP_URL: https://investigator-crew-a2a-<random>.cfapps.eu10-004.hana.ondemand.com
+  APP_URL: https://investigator-crew-<YOUR NAME>-<random>.cfapps.eu10-004.hana.ondemand.com
 ```
 
 👉 Push again so the Agent Card serves the correct URL:
@@ -435,7 +437,7 @@ You should see your agent's description:
 {
   "name": "Investigator Crew",
   "description": "Multi-agent art theft investigation crew exposed as an A2A server",
-  "url": "https://investigator-crew-a2a-<random>.cfapps.eu10-004.hana.ondemand.com",
+  "url": "https://investigator-crew-<YOUR NAME>-<random>.cfapps.eu10-004.hana.ondemand.com",
   "version": "1.0.0",
   "skills": [...]
 }
@@ -469,7 +471,7 @@ Expected response: `{"status": "ok"}`
 If something went wrong during startup:
 
 ```bash
-cf logs investigator-crew-a2a --recent
+cf logs investigator-crew-<YOUR NAME> --recent
 ```
 
 ---
@@ -484,7 +486,7 @@ You now have a live, publicly reachable multi-agent system:
 Internet
     │
     ▼
-CF Router → investigator-crew-a2a (uvicorn / FastAPI)
+CF Router → investigator-crew-<YOUR NAME> (uvicorn / FastAPI)
                 │
                 ├── GET  /.well-known/agent-card.json  → AgentCard
                 ├── GET  /.well-known/agent.json        → AgentCard (backwards compat)
@@ -540,7 +542,7 @@ CF Router → investigator-crew-a2a (uvicorn / FastAPI)
 
 **Issue**: `cf push` fails with `health check failed`
 
-- **Solution**: Check `cf logs investigator-crew-a2a --recent`. Common causes:
+- **Solution**: Check `cf logs investigator-crew-<YOUR NAME> --recent`. Common causes:
   - Missing `requirements.txt` dependency
   - Import error in `server.py` or `investigator_crew.py`
   - Service binding not found — verify the service name matches exactly (`generative-ai-hub`)
@@ -555,7 +557,7 @@ CF Router → investigator-crew-a2a (uvicorn / FastAPI)
 
 **Issue**: App crashes immediately after startup
 
-- **Solution**: You likely have a missing environment variable. Check `cf logs investigator-crew-a2a --recent` for `KeyError` or `AttributeError`. Verify all `env:` values in `manifest.yml` are set, especially `RPT1_DEPLOYMENT_URL`.
+- **Solution**: You likely have a missing environment variable. Check `cf logs investigator-crew-<YOUR NAME> --recent` for `KeyError` or `AttributeError`. Verify all `env:` values in `manifest.yml` are set, especially `RPT1_DEPLOYMENT_URL`.
 
 **Issue**: `.env` was accidentally uploaded and credentials are exposed
 
@@ -563,7 +565,7 @@ CF Router → investigator-crew-a2a (uvicorn / FastAPI)
 
 **Issue**: `Error: relation between task and context not found` when calling the agent
 
-- **Solution**: The app likely restarted and lost its in-memory task state. Ensure `--workers 1` is in your `command` and check `cf logs investigator-crew-a2a --recent` for unexpected restarts.
+- **Solution**: The app likely restarted and lost its in-memory task state. Ensure `--workers 1` is in your `command` and check `cf logs investigator-crew-<YOUR NAME> --recent` for unexpected restarts.
 
 ---
 
